@@ -24,17 +24,13 @@
   min-width: 240px;
 }
 .brandMark {
-  display: grid;
-  place-items: center;
+  display: block;
   width: 48px;
   height: 48px;
   flex-shrink: 0;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 15px;
-  color: var(--primary-dark);
-  background: var(--accent);
-  font-weight: 900;
-  letter-spacing: -0.05em;
+  object-fit: cover;
 }
 .devSignature {
   width: fit-content;
@@ -240,6 +236,13 @@
   .brandMark {
     width: 42px;
     height: 42px;
+  }
+  .devSignature {
+    margin-top: 5px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.6875rem;
+    line-height: 1.4;
   }
   .topbarControls {
     display: grid;

@@ -1,6 +1,7 @@
 import type { CalculatorConfig, Locale } from '../domain/types';
 import { useI18n } from '../context/LocaleContext';
 import { cx } from '../shared/cx';
+import hpBottle from '../assets/hp-bottle.png';
 import styles from './Header.module.css';
 
 const localeLabels: Record<Locale, string> = {
@@ -36,14 +37,13 @@ export function Header({
   return (
     <header className={styles.topbar}>
       <div className={styles.topbarBrand}>
-        <span className={styles.brandMark} aria-hidden="true">
-          HP
-        </span>
+        <img className={styles.brandMark} src={hpBottle} alt="" />
+
         <div>
           <h1>{t('appTitle')}</h1>
           {/* Easter egg: Dev's in-game ID */}
           <p id="51921435" className={styles.devSignature}>
-            From <strong>Hunter [S517]</strong> with ❤️
+            From <strong>HUNTERS [S517]</strong> with ❤️
           </p>
         </div>
       </div>
