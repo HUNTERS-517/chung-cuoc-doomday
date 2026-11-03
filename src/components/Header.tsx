@@ -124,6 +124,18 @@ export function Header({
               </button>
             ))}
           </div>
+          <select
+            className={styles.languageSelect}
+            value={locale}
+            onChange={(e) => changeLocale(e.target.value as Locale)}
+            aria-label={t('language')}
+          >
+            {locales.map((code) => (
+              <option key={code} value={code}>
+                {localeLabels[code]}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </header>
