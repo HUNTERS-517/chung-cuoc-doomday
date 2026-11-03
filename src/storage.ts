@@ -1,4 +1,7 @@
-import { createDefaultFormValue } from './domain/defaultFormValue';
+import {
+  createDefaultFormValue,
+  createDefaultProfiles,
+} from './domain/defaultFormValue';
 import type { CalculatorConfig, Locale } from './domain/types';
 
 const CONFIG_KEY = 'hp-calculator:configs:v1';
@@ -34,8 +37,8 @@ export function loadProfiles(): {
       : configs[0].id;
     return { configs, activeId };
   } catch {
-    const config = createDefaultFormValue();
-    return { configs: [config], activeId: config.id };
+    const configs = createDefaultProfiles();
+    return { configs, activeId: configs[0].id };
   }
 }
 

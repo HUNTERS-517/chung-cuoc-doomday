@@ -23,3 +23,26 @@ export function createDefaultFormValue(
     buyDailyDiamonds: true,
   };
 }
+
+/** Starter profiles shown when nothing is saved yet. */
+export function createDefaultProfiles(): CalculatorConfig[] {
+  return [
+    {
+      ...createDefaultFormValue(),
+      name: 'Vòng Loại',
+      endDate: '2026-11-04',
+      guildLevel: '27',
+      maxGuildLevel: 27,
+    },
+    {
+      ...createDefaultFormValue(),
+      name: 'Vòng Chính',
+      endDate: '2026-11-08',
+      guildLevel: '0',
+      currentMerit: '0',
+      hpBackup: '0',
+      currentBottles: '0',
+      currentHp: '237479',
+    },
+  ];
+}
