@@ -40,6 +40,44 @@ export function calculateProjection({
   return resultWithFormula(projectionValue, projectionFormula);
 }
 
+/** Breaks the selected scenario into Merit + HP + backup + projected additions. */
+export function calculateProjectionBreakdown({
+  merit,
+  currentHp,
+  hpBackup,
+  bottleHp,
+  resetHp,
+  recoveryHp,
+  extraMaxHp,
+  extraMaxBottles,
+}: ProjectionInputs & {
+  extraMaxHp: number | null;
+  extraMaxBottles: number | null;
+}) {
+  const extraTerms = [bottleHp, resetHp, recoveryHp];
+  const projectedExtra = resultWithFormula(
+    sumOrNull(...extraTerms),
+    (value, { formatNumber: f, label: l }) =>
+      `${l('projectedExtraFormula')}\n${extraTerms.map(f).join(' + ')} = ${f(value)} HP`,
+  );
+
+  const currentTerms = [merit, currentHp, hpBackup, projectedExtra.value];
+  const currentValue = sumOrNull(...currentTerms);
+  const currentLevel = resultWithFormula(
+    currentValue,
+    (value, { formatNumber: f, label: l }) =>
+      `${l('currentLevelFormula')}\n${currentTerms.map(f).join(' + ')} = ${f(value)} HP`,
+  );
+
+  const guildMax = resultWithFormula(
+    sumOrNull(currentValue, extraMaxHp),
+    (value, { formatNumber: f, label: l }) =>
+      `${f(currentValue)} + ${f(extraMaxHp)} HP (${f(extraMaxBottles)} ${l('bottles')}) = ${f(value)} HP`,
+  );
+
+  return { projectedExtra, currentLevel, guildMax };
+}
+
 function withGuildBonus(
   current: ResultWithFormula,
   extraMaxHp: ResultWithFormula,

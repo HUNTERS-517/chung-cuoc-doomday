@@ -12,7 +12,9 @@ export type FormulaLabel =
   | 'timeLeft'
   | 'fillTime'
   | 'dischargeTime'
-  | 'scenarioTotalFormula';
+  | 'scenarioTotalFormula'
+  | 'projectedExtraFormula'
+  | 'currentLevelFormula';
 
 export interface FormulaFormat {
   formatNumber: (value: number | null) => string;

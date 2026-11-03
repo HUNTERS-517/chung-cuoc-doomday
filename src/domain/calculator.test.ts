@@ -44,6 +44,15 @@ describe('calculate', () => {
         result.scenarios[key].current.value,
       );
       expect(result.projectedMax.value).toBe(result.scenarios[key].max.value);
+      const { projectedExtra, currentLevel, guildMax } =
+        result.projectionBreakdown;
+      expect(projectedExtra.value).toBe(
+        result.totalBottleHp.value! +
+          result.resetHp.value! +
+          result.recoveryHp.value!,
+      );
+      expect(currentLevel.value).toBe(result.projectedCurrent.value);
+      expect(guildMax.value).toBe(result.projectedMax.value);
     },
   );
 

@@ -420,12 +420,26 @@ export const messages = {
     id: 'Jumlah botol saat ini adalah total dari semua sumber yang sudah diterima. Proyeksi hanya menambahkan sumber mendatang.',
     zh: '当前药瓶数是已领取所有来源的总数。预测只会增加未来可获得的部分。',
   },
-  maxTip: {
-    vi: 'Bang max chỉ cộng chênh lệch thưởng từ level hiện tại, không cộng lại phần đã nhận.',
-    en: 'Guild max only adds the reward difference from the current level; received rewards are not counted twice.',
-    th: 'กิลด์เลเวลสูงสุดจะเพิ่มเฉพาะส่วนต่างของรางวัลจากเลเวลปัจจุบัน และไม่นับรางวัลที่ได้รับแล้วซ้ำ',
-    id: 'Level guild maksimum hanya menambahkan selisih hadiah dari level saat ini; hadiah yang sudah diterima tidak dihitung dua kali.',
-    zh: '公会满级只增加相对当前等级的奖励差额，不会重复计算已领取的奖励。',
+  projectedExtra: {
+    vi: 'Tổng thêm dự kiến',
+    en: 'Projected additional HP',
+    th: 'HP ที่คาดว่าจะได้เพิ่ม',
+    id: 'Perkiraan HP tambahan',
+    zh: '预计新增 HP',
+  },
+  projectedExtraFormula: {
+    vi: 'Tổng HP từ bình + HP reset + Tổng HP hồi tới ngày kết thúc',
+    en: 'Total HP from batteries + HP reset + Total HP recovered by event end',
+    th: 'HP รวมจากขวด + HP จากการรีเซ็ต + HP รวมที่ฟื้นฟูได้จนจบอีเวนต์',
+    id: 'Total HP dari botol + HP dari reset + Total HP pulih hingga event berakhir',
+    zh: '药瓶总 HP + 重置 HP + 活动结束前恢复的总 HP',
+  },
+  currentLevelFormula: {
+    vi: 'Chiến công hiện có + Máu hiện tại + HP dự trữ + Tổng thêm dự kiến',
+    en: 'Current Merit + Current HP + HP backup + Projected additional HP',
+    th: 'แต้มผลงานปัจจุบัน + HP ปัจจุบัน + HP สำรอง + HP ที่คาดว่าจะได้เพิ่ม',
+    id: 'Merit saat ini + HP saat ini + Cadangan HP + Perkiraan HP tambahan',
+    zh: '当前战功 + 当前 HP + 储备 HP + 预计新增 HP',
   },
   backupAdjustedTitle: {
     vi: 'Đã điều chỉnh HP dự trữ',

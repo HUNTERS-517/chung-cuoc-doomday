@@ -18,6 +18,7 @@ import {
 } from './calculations/hpRecovery';
 import {
   calculateProjection,
+  calculateProjectionBreakdown,
   calculateScenarios,
 } from './calculations/eventHpEstimation';
 
@@ -95,6 +96,16 @@ export function calculate(
       : 'neither';
   const { current: projectedCurrent, max: projectedMax } =
     scenarios[selectedScenario];
+  const projectionBreakdown = calculateProjectionBreakdown({
+    merit,
+    currentHp,
+    hpBackup,
+    bottleHp: totalBottleHp.value,
+    resetHp: resetHp.value,
+    recoveryHp: recoveryHp.value,
+    extraMaxHp: extraMaxHp.value,
+    extraMaxBottles,
+  });
 
   return {
     daysRemaining,
@@ -111,6 +122,7 @@ export function calculate(
     extraMaxHp,
     projectedCurrent,
     projectedMax,
+    projectionBreakdown,
     hoursToFill,
     dischargeHours,
     dischargeHp,

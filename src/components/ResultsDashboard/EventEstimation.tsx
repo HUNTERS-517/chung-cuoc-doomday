@@ -72,17 +72,42 @@ export function EventEstimation() {
             </span>
             <strong>{format(result.recoveryHp.value)}</strong>
           </div>
+          <div>
+            <span>
+              {t('projectedExtra')}{' '}
+              <InfoTip
+                label={result.projectionBreakdown.projectedExtra.formatFormula(
+                  formulaFormat,
+                )}
+              />
+            </span>
+            <strong>
+              {format(result.projectionBreakdown.projectedExtra.value)}
+            </strong>
+          </div>
         </div>
       </details>
       <div className={styles.projectionGrid}>
         <div className={styles.projection}>
-          <span>{t('currentLevel')}</span>
+          <span>
+            {t('currentLevel')}{' '}
+            <InfoTip
+              label={result.projectionBreakdown.currentLevel.formatFormula(
+                formulaFormat,
+              )}
+            />
+          </span>
           <strong>{format(result.projectedCurrent.value)}</strong>
           <small>HP</small>
         </div>
         <div className={styles.projection}>
           <span>
-            {t('guildMax')} <InfoTip label={t('maxTip')} />
+            {t('guildMax')}{' '}
+            <InfoTip
+              label={result.projectionBreakdown.guildMax.formatFormula(
+                formulaFormat,
+              )}
+            />
           </span>
           <strong>{format(result.projectedMax.value)}</strong>
           <small>HP</small>

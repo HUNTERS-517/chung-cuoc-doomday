@@ -56,6 +56,12 @@ export interface CalculatorResult {
   extraMaxHp: ResultWithFormula;
   projectedCurrent: ResultWithFormula;
   projectedMax: ResultWithFormula;
+  /** Tooltip breakdown of the selected scenario; values match projectedCurrent/Max. */
+  projectionBreakdown: {
+    projectedExtra: ResultWithFormula;
+    currentLevel: ResultWithFormula;
+    guildMax: ResultWithFormula;
+  };
   hoursToFill: ResultWithFormula;
   dischargeHours: ResultWithFormula;
   dischargeHp: ResultWithFormula;
