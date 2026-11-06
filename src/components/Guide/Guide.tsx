@@ -126,14 +126,30 @@ export function GuideButton({
   );
 }
 
-/** Full-width annotated image, trimmed to `panel.crop` when set (responsive). */
+/**
+ * Annotated image filling the column, trimmed to `panel.crop` when set.
+ * Capped at its natural pixel width so it is never upscaled (stays sharp).
+ */
 function PanelImage({ panel }: { panel: GuidePanel }) {
   const alt = panel.fields.map((f) => GUIDE_REGIONS[f].code).join(', ');
-  if (!panel.crop) return <img src={panel.src} alt={alt} loading="lazy" />;
-  const [iw, ih] = panel.imageSize;
+  const [iw] = panel.imageSize;
+  if (!panel.crop) {
+    return (
+      <img
+        src={panel.src}
+        alt={alt}
+        loading="lazy"
+        className={styles.panelImage}
+        style={{ maxWidth: iw }}
+      />
+    );
+  }
   const [x, y, w, h] = panel.crop;
   return (
-    <span className={styles.panelCrop} style={{ aspectRatio: `${w} / ${h}` }}>
+    <span
+      className={cx(styles.panelImage, styles.panelCrop)}
+      style={{ aspectRatio: `${w} / ${h}`, maxWidth: w }}
+    >
       <img
         src={panel.src}
         alt={alt}

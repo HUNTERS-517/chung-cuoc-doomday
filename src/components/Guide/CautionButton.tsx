@@ -8,6 +8,14 @@ import styles from './Guide.module.css';
 
 /** Buff icon positions in caution-buffs.png (175×76), as % of the image. */
 const BUFF_IMAGE = { w: 175, h: 76 };
+/**
+ * Display scale for the caution screenshots. The source files are small
+ * (175-269px wide), so keep the upscale mild to avoid visible blur.
+ */
+const BUFF_SCALE = 1.8;
+const SHOT_SCALE = 1.25;
+const HP_IMAGE_WIDTH = 269;
+const RECOVERY_IMAGE_WIDTH = 219;
 const BUFF_ICONS: Array<[x: number, y: number, w: number, h: number]> = [
   [85, 47, 25, 28], // max HP buff
   [117, 47, 27, 28], // recovery buff
@@ -33,7 +41,7 @@ export function CautionButton() {
       </button>
       <dialog
         ref={dialogRef}
-        className={cx(styles.dialog, styles.dialogCompact)}
+        className={cx(styles.dialog, styles.dialogCaution)}
         aria-label={t('cautionTitle')}
         onClick={(event) => {
           if (event.target === event.currentTarget) close();
@@ -62,7 +70,7 @@ export function CautionButton() {
             </figcaption>
             <span
               className={styles.cautionShot}
-              style={{ width: BUFF_IMAGE.w * 1.6 }}
+              style={{ width: BUFF_IMAGE.w * BUFF_SCALE }}
             >
               <img src={buffsImg} alt="" />
               {BUFF_ICONS.map(([x, y, w, h]) => (
@@ -87,8 +95,18 @@ export function CautionButton() {
               {t('cautionActive')}
             </figcaption>
             <div className={styles.cautionPair}>
-              <img src={hpImg} alt="" className={styles.cautionShot} />
-              <img src={recoveryImg} alt="" className={styles.cautionShot} />
+              <img
+                src={hpImg}
+                alt=""
+                className={styles.cautionShot}
+                style={{ width: HP_IMAGE_WIDTH * SHOT_SCALE }}
+              />
+              <img
+                src={recoveryImg}
+                alt=""
+                className={styles.cautionShot}
+                style={{ width: RECOVERY_IMAGE_WIDTH * SHOT_SCALE }}
+              />
             </div>
             <p className={styles.cautionNote}>{t('cautionActiveNote')}</p>
           </figure>

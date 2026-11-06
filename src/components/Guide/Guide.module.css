@@ -108,16 +108,17 @@
 .imageGrid {
   display: grid;
   /* --cols / --cols-md are set from the real column count (Guide.tsx). */
-  grid-template-columns: repeat(var(--cols, 2), 300px);
+  /* 380px ≈ the screenshots' natural width, so images show near 1:1. */
+  grid-template-columns: repeat(var(--cols, 2), 380px);
   gap: 14px 24px;
   align-items: start;
 }
-@media (max-width: 1040px) {
+@media (max-width: 1280px) {
   .imageGrid {
-    grid-template-columns: repeat(var(--cols-md, 2), 300px);
+    grid-template-columns: repeat(var(--cols-md, 2), 380px);
   }
 }
-@media (max-width: 720px) {
+@media (max-width: 880px) {
   .dialogFit {
     width: calc(100vw - 32px);
   }
@@ -138,6 +139,10 @@
   height: auto;
   border-radius: 8px;
 }
+.panelImage {
+  width: 100%;
+  justify-self: center;
+}
 .panelCrop {
   position: relative;
   display: block;
@@ -156,6 +161,10 @@
 
 .dialogCompact {
   width: min(640px, calc(100vw - 32px));
+}
+/* Wide enough for the two enlarged "active" shots side by side. */
+.dialogCaution {
+  width: min(720px, calc(100vw - 32px));
 }
 .cardGrid {
   display: grid;
