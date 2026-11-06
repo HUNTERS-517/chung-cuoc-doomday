@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { FocusEvent } from 'react';
+import type { FocusEvent, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from '../../context/LocaleContext';
 import { GUIDE_REGIONS, imagesFor } from './guideData';
@@ -114,10 +114,13 @@ export function GuideHeading({
   title,
   fields,
   compact,
+  children,
 }: {
   title: string;
   fields: GuideField[];
   compact?: boolean;
+  /** Extra buttons rendered right after the guide button. */
+  children?: ReactNode;
 }) {
   const match = /^([A-Z])\.\s*(.*)$/.exec(title);
   return (
@@ -133,6 +136,7 @@ export function GuideHeading({
         )}
       </h2>
       <GuideButton fields={fields} title={title} compact={compact} />
+      {children}
     </div>
   );
 }

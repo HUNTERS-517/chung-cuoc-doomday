@@ -5,6 +5,7 @@ import { useTranslation } from '../context/LocaleContext';
 import { cx } from '../shared/cx';
 import { GuideBadge, GuideHeading, useGuideFocusHint } from './Guide/Guide';
 import { ACCOUNT_GUIDE_FIELDS } from './Guide/guideData';
+import { CautionButton } from './Guide/CautionButton';
 import shared from './shared.module.css';
 import styles from './AccountInputs.module.css';
 
@@ -29,7 +30,9 @@ export function AccountInputs({ onChange, onBlur }: AccountInputsProps) {
   return (
     <section className={cx(shared.card, styles.accountCard)}>
       <div className={shared.sectionHeading}>
-        <GuideHeading title={t('accountData')} fields={ACCOUNT_GUIDE_FIELDS} />
+        <GuideHeading title={t('accountData')} fields={ACCOUNT_GUIDE_FIELDS}>
+          <CautionButton />
+        </GuideHeading>
         <span className={shared.sectionIndex}>01</span>
       </div>
       <div className={styles.accountGrid}>

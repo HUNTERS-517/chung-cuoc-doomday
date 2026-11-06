@@ -176,3 +176,80 @@
   max-width: none;
   height: auto;
 }
+
+/* Caution (official-round buffs) */
+.cautionButton {
+  border-color: #f0b4b4;
+  color: #b42323;
+  background: #fdeaea;
+}
+.cautionButton:hover {
+  background: #fbd5d5;
+}
+.cautionTitle {
+  color: #b42323;
+}
+.cautionSteps {
+  display: grid;
+  gap: 12px;
+}
+.cautionOk {
+  border-color: #bfe0c9;
+  background: #f2faf4;
+}
+.cautionBad {
+  border-color: #f0c4c4;
+  background: #fdf4f4;
+}
+.badgeOk {
+  border-color: #9fd3b0;
+  color: #1f6b3a;
+  background: #d3f0dc;
+}
+.badgeBad {
+  border-color: #f0b4b4;
+  color: #b42323;
+  background: #fbd5d5;
+}
+.cautionShot {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.cautionShot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.cautionMark {
+  position: absolute;
+  border: 2px solid #e53935;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+.cautionPair {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.cautionNote {
+  margin: 0;
+  justify-self: stretch;
+  color: #45514c;
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+.cautionTip {
+  margin: 12px 0 0;
+  padding: 8px 10px;
+  border-left: 3px solid #e53935;
+  border-radius: 6px;
+  color: #17221e;
+  background: #fff6e6;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
