@@ -119,9 +119,19 @@ export function GuideHeading({
   fields: GuideField[];
   compact?: boolean;
 }) {
+  const match = /^([A-Z])\.\s*(.*)$/.exec(title);
   return (
     <div className={styles.headingGroup}>
-      <h2>{title}</h2>
+      <h2 className={styles.headingTitle}>
+        {match ? (
+          <>
+            <span className={styles.headingLetter}>{match[1]}</span>
+            {match[2]}
+          </>
+        ) : (
+          title
+        )}
+      </h2>
       <GuideButton fields={fields} title={title} compact={compact} />
     </div>
   );
