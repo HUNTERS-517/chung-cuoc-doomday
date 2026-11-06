@@ -6,7 +6,7 @@ import { ResultsDashboard } from './components/ResultsDashboard';
 import { useCalculatorProfiles } from './hooks/useCalculatorProfiles';
 import { useCalculatorInputHandlers } from './hooks/useCalculatorInputHandlers';
 import { calculate } from './domain/calculator';
-import { useCalculatorCurrentTime } from './hooks/useCalculatorCurrentTime';
+import { useNow } from './hooks/useNow';
 import { useTranslation } from './context/LocaleContext';
 import { CalculatorProvider } from './context/CalculatorContext';
 import { cx } from './shared/cx';
@@ -39,7 +39,7 @@ export default function App() {
     dismissBackupNotice,
   } = useCalculatorInputHandlers(activeConfig, updateActive);
 
-  const now = useCalculatorCurrentTime();
+  const now = useNow();
   const t = useTranslation();
   const result = useMemo(
     () => calculate(activeConfig, now),
@@ -92,9 +92,7 @@ export default function App() {
               onClick={(event) => event.stopPropagation()}
               onSubmit={(event) => {
                 event.preventDefault();
-                const name = renameDraft.name.trim();
-                if (!name) return;
-                renameProfile(renameDraft.id, name);
+                renameProfile(renameDraft.id, renameDraft.name);
                 setRenameDraft(null);
               }}
             >

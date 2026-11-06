@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-/** Refreshes the current time for calculator updates. */
-export function useCalculatorCurrentTime() {
+/** Current time, refreshed every 5s and whenever the tab regains focus. */
+export function useNow() {
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
