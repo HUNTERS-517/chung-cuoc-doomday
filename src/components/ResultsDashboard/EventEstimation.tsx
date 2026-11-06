@@ -40,7 +40,7 @@ export function EventEstimation() {
           <h3>{t('details')}</h3>
         </summary>
         <div className={styles.detailList}>
-          <div>
+          <div data-tip-row>
             <span>
               {t('projectedBottles')}{' '}
               <InfoTip
@@ -49,7 +49,7 @@ export function EventEstimation() {
             </span>
             <strong>{format(result.totalBottles.value)}</strong>
           </div>
-          <div>
+          <div data-tip-row>
             <span>
               {t('bottleHp')}{' '}
               <InfoTip
@@ -58,21 +58,21 @@ export function EventEstimation() {
             </span>
             <strong>{format(result.totalBottleHp.value)}</strong>
           </div>
-          <div>
+          <div data-tip-row>
             <span>
               {t('hpReset')}{' '}
               <InfoTip label={result.resetHp.formatFormula(formulaFormat)} />
             </span>
             <strong>{format(result.resetHp.value)}</strong>
           </div>
-          <div>
+          <div data-tip-row>
             <span>
               {t('hpRecovered')}{' '}
               <InfoTip label={result.recoveryHp.formatFormula(formulaFormat)} />
             </span>
             <strong>{format(result.recoveryHp.value)}</strong>
           </div>
-          <div>
+          <div data-tip-row>
             <span>
               {t('projectedExtra')}{' '}
               <InfoTip
@@ -88,7 +88,7 @@ export function EventEstimation() {
         </div>
       </details>
       <div className={styles.projectionGrid}>
-        <div className={styles.projection}>
+        <div className={styles.projection} data-tip-row>
           <span>
             {t('currentLevel')}{' '}
             <InfoTip
@@ -100,7 +100,7 @@ export function EventEstimation() {
           <strong>{format(result.projectedCurrent.value)}</strong>
           <small>HP</small>
         </div>
-        <div className={styles.projection}>
+        <div className={styles.projection} data-tip-row>
           <span>
             {t('guildMax')}{' '}
             <InfoTip
@@ -115,7 +115,7 @@ export function EventEstimation() {
       </div>
       <ScenarioComparison />
       <div className={styles.timingGrid}>
-        <div>
+        <div data-tip-row>
           <span>
             {t('fillTime')}{' '}
             <InfoTip label={result.hoursToFill.formatFormula(formulaFormat)} />
@@ -124,7 +124,7 @@ export function EventEstimation() {
             {format(result.hoursToFill.value)} <small>{t('hours')}</small>
           </strong>
         </div>
-        <div>
+        <div data-tip-row>
           <span>
             {t('dischargeTime')}{' '}
             <InfoTip
@@ -135,7 +135,7 @@ export function EventEstimation() {
             {formatDischarge(result.dischargeHours.value, t('hours'))}
           </strong>
         </div>
-        <div className={styles.timingAccent}>
+        <div className={styles.timingAccent} data-tip-row>
           <span>
             {t('dischargeHp')}{' '}
             <InfoTip label={result.dischargeHp.formatFormula(formulaFormat)} />

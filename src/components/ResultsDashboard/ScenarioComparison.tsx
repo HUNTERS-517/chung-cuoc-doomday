@@ -36,6 +36,7 @@ export function ScenarioComparison() {
                 key === selectedScenario && styles.isCurrent,
               )}
               key={key}
+              data-tip-row
             >
               <span>
                 {t(key)}{' '}

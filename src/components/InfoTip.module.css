@@ -12,6 +12,11 @@
   opacity: 0.75;
   vertical-align: 1px;
 }
+@media (hover: hover) and (pointer: fine) {
+  :global([data-tip-row]) {
+    cursor: help;
+  }
+}
 .infoPopover {
   position: fixed;
   z-index: 1000;
