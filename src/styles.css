@@ -44,6 +44,16 @@ select {
 button {
   cursor: pointer;
 }
+/* iOS Safari zooms into any focused field under 16px, which leaves the page
+   zoomed (horizontal scroll) and misplaces fixed popovers. !important beats
+   the smaller sizes set in component styles. */
+@media (hover: none) and (pointer: coarse) {
+  input:not([type='checkbox']):not([type='radio']),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
