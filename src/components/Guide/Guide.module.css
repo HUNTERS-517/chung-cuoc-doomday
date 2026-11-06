@@ -176,6 +176,24 @@
 .cardColumns .column {
   gap: 12px;
 }
+.panelNote {
+  margin: 0;
+  padding: 8px 10px;
+  border-left: 3px solid #b8c4bf;
+  border-radius: 6px;
+  background: #eef2f0;
+  color: #4a5651;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  /* Translations use "\n" for one short point per line. */
+  white-space: pre-line;
+}
+.fieldNote {
+  margin: 0;
+  justify-self: start;
+  color: #4a5651;
+  font-size: 0.72rem;
+}
 .card {
   display: grid;
   align-content: start;
@@ -287,6 +305,22 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+.cautionShotWithFormula {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+}
+.cautionFormula {
+  margin: 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #fff;
+  color: #45514c;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  text-align: center;
+  white-space: pre-line;
 }
 .cautionNote {
   margin: 0;

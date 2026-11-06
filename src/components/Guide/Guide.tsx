@@ -74,9 +74,16 @@ export function GuideButton({
           <div className={styles.cardColumns}>
             {columns.map((column) => (
               <div key={column[0].fields[0]} className={styles.column}>
-                {column
-                  .flatMap((panel) => panel.fields)
-                  .map((field) => (
+                {column.flatMap((panel) => [
+                  panel.noteKey && (
+                    <p
+                      key={`note-${panel.fields[0]}`}
+                      className={styles.panelNote}
+                    >
+                      {t(panel.noteKey)}
+                    </p>
+                  ),
+                  ...panel.fields.map((field) => (
                     <figure key={field} className={styles.card}>
                       <figcaption className={styles.cardCaption}>
                         <span className={styles.badge}>
@@ -84,13 +91,19 @@ export function GuideButton({
                         </span>
                         {t(GUIDE_REGIONS[field].labelKey)}
                       </figcaption>
+                      {GUIDE_REGIONS[field].noteKey && (
+                        <p className={styles.fieldNote}>
+                          {t(GUIDE_REGIONS[field].noteKey)}
+                        </p>
+                      )}
                       <GuideCrop
                         field={field}
                         maxScale={1}
                         maxWidth={COMPACT_CROP_WIDTH}
                       />
                     </figure>
-                  ))}
+                  )),
+                ])}
               </div>
             ))}
           </div>

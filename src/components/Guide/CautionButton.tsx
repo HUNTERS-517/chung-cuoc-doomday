@@ -1,5 +1,11 @@
 import { useRef } from 'react';
-import { useTranslation } from '../../context/LocaleContext';
+import { useCalculator } from '../../context/CalculatorContext';
+import {
+  useFormat,
+  useI18n,
+  useTranslation,
+} from '../../context/LocaleContext';
+import { HP_PER_BOTTLE } from '../../domain/calculations/bottleResources';
 import { cx } from '../../shared/cx';
 import buffsImg from '../../assets/caution-buffs.png';
 import hpImg from '../../assets/caution-hp.png';
@@ -16,6 +22,9 @@ const BUFF_SCALE = 1.8;
 const SHOT_SCALE = 1.25;
 const HP_IMAGE_WIDTH = 269;
 const RECOVERY_IMAGE_WIDTH = 219;
+/** Official-round recovery buff: +20% HP recovery for 2 hours. */
+const RECOVERY_BUFF_RATE = 0.2;
+const BUFF_MINUTES = 120;
 const BUFF_ICONS: Array<[x: number, y: number, w: number, h: number]> = [
   [85, 47, 25, 28], // max HP buff
   [117, 47, 27, 28], // recovery buff
@@ -27,7 +36,15 @@ const BUFF_ICONS: Array<[x: number, y: number, w: number, h: number]> = [
  */
 export function CautionButton() {
   const t = useTranslation();
+  const format = useFormat();
+  const { locale } = useI18n();
+  const { config } = useCalculator();
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const recoveryRate = config.recoveryRate;
+  const buffHp = recoveryRate * RECOVERY_BUFF_RATE * BUFF_MINUTES;
+  const buffBottles = Math.floor(buffHp / HP_PER_BOTTLE);
+  // `format` drops decimals, so render the 0.2 rate with the locale's separator.
+  const rateText = RECOVERY_BUFF_RATE.toLocaleString(locale);
   const close = () => dialogRef.current?.close();
 
   return (
@@ -101,12 +118,23 @@ export function CautionButton() {
                 className={styles.cautionShot}
                 style={{ width: HP_IMAGE_WIDTH * SHOT_SCALE }}
               />
-              <img
-                src={recoveryImg}
-                alt=""
-                className={styles.cautionShot}
-                style={{ width: RECOVERY_IMAGE_WIDTH * SHOT_SCALE }}
-              />
+              <div className={styles.cautionShotWithFormula}>
+                <img
+                  src={recoveryImg}
+                  alt=""
+                  className={styles.cautionShot}
+                  style={{ width: RECOVERY_IMAGE_WIDTH * SHOT_SCALE }}
+                />
+                <p className={styles.cautionFormula}>
+                  {t('cautionRecoveryFormula')}
+                  {'\n'}
+                  {format(recoveryRate)} × {rateText} × {BUFF_MINUTES} ={' '}
+                  <strong>{format(buffHp)} HP</strong> ~{' '}
+                  <strong>
+                    {format(buffBottles)} {t('cautionBottles')}
+                  </strong>
+                </p>
+              </div>
             </div>
             <p className={styles.cautionNote}>{t('cautionActiveNote')}</p>
           </figure>

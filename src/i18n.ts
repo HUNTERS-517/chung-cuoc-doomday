@@ -500,6 +500,20 @@ export const messages = {
     id: 'Setiap kotak merah di tangkapan layar game memiliki kode (A1, B2…) yang sama dengan label di samping kolom input — isi angka di kotak merah ke kolom berkode sama.',
     zh: '游戏截图中每个红框都有编号（A1、B2…），与此处输入框旁的编号对应——将红框中的数字填入相同编号的输入框。',
   },
+  guideCheckboxNote: {
+    vi: '☑ 2 ô tick ở "Quy tắc nguồn bình"\n• Đã mua thì tick',
+    en: '☑ 2 checkboxes under "Battery sources"\n• Tick if bought',
+    th: '☑ ช่องติ๊ก 2 ช่องใน "แหล่งที่มาของขวด"\n• ซื้อแล้วให้ติ๊ก',
+    id: '☑ 2 kotak centang di "Sumber botol"\n• Centang jika sudah beli',
+    zh: '☑“药瓶来源”下的 2 个勾选框\n• 已购买则勾选',
+  },
+  guideGuildLevelNote: {
+    vi: 'Lấy level trong hình trừ đi 1 (vd: 28 − 1 = 27)',
+    en: 'Take the level shown minus 1 (e.g. 28 − 1 = 27)',
+    th: 'ใช้เลเวลในภาพลบ 1 (เช่น 28 − 1 = 27)',
+    id: 'Ambil level di gambar dikurangi 1 (mis. 28 − 1 = 27)',
+    zh: '取图中等级减 1（例：28 − 1 = 27）',
+  },
   caution: {
     vi: 'Lưu ý',
     en: 'Caution',
@@ -548,6 +562,20 @@ export const messages = {
     th: 'บัฟมีผลแค่ 2 ชั่วโมง แต่แอปจะคำนวณเหมือนมีผลตลอดทั้งอีเวนต์ ผลลัพธ์จึงคลาดเคลื่อนมาก',
     id: 'Buff hanya berlaku 2 jam, tetapi aplikasi menghitungnya seolah berlaku sepanjang event, sehingga hasilnya meleset jauh.',
     zh: '增益只持续 2 小时，但应用会按整个活动期间都生效来计算，因此结果偏差很大。',
+  },
+  cautionRecoveryFormula: {
+    vi: 'Tốc độ hồi HP × tỉ lệ buff tăng × 2 tiếng buff (phút)',
+    en: 'HP recovery rate × buff increase × 2 h buff (minutes)',
+    th: 'ความเร็วฟื้นฟู HP × อัตราบัฟที่เพิ่ม × บัฟ 2 ชม. (นาที)',
+    id: 'Kecepatan pemulihan HP × kenaikan buff × buff 2 jam (menit)',
+    zh: 'HP 恢复速度 × 增益提升比例 × 2 小时增益（分钟）',
+  },
+  cautionBottles: {
+    vi: 'bình',
+    en: 'batteries',
+    th: 'ขวด',
+    id: 'botol',
+    zh: '瓶',
   },
   cautionTip: {
     vi: '👉 Hãy nhập số liệu khi cả 2 buff đã hết hiệu lực.',

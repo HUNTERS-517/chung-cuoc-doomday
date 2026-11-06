@@ -18,6 +18,8 @@ export interface GuideRegion {
   imageSize: [number, number];
   box: Rect;
   crop?: Rect;
+  /** Optional hint shown under the field's caption in the guide dialog. */
+  noteKey?: TranslationKey;
 }
 
 const LABEL_KEYS: Record<GuideField, TranslationKey> = {
@@ -60,6 +62,7 @@ export const GUIDE_REGIONS = Object.fromEntries(
       ] as [number, number],
       box: r.box as Rect,
       crop: 'crop' in r ? (r.crop as Rect) : undefined,
+      noteKey: 'noteKey' in r ? (r.noteKey as TranslationKey) : undefined,
     };
     return [field, region];
   }),
@@ -88,6 +91,8 @@ export interface GuidePanel {
   imageSize: [number, number];
   fields: GuideField[];
   crop?: Rect;
+  /** Optional explanatory note shown above the panel. */
+  noteKey?: TranslationKey;
 }
 
 /**
@@ -96,19 +101,32 @@ export interface GuidePanel {
  * distinct annotated image, in field order.
  */
 export function panelsFor(fields: GuideField[]): GuidePanel[][] {
-  const panel = (panelFields: GuideField[], crop?: Rect): GuidePanel => {
+  const panel = (
+    panelFields: GuideField[],
+    crop?: Rect,
+    noteKey?: TranslationKey,
+  ): GuidePanel => {
     const { src, imageSize } = GUIDE_REGIONS[panelFields[0]];
-    return { src, imageSize, fields: panelFields, crop };
+    return { src, imageSize, fields: panelFields, crop, noteKey };
   };
   const section = GUIDE_REGIONS[fields[0]].code[0];
   const layout = (
     regions.panels as Partial<
-      Record<string, { fields: string[]; crop?: number[] }[][]>
+      Record<
+        string,
+        { fields: string[]; crop?: number[]; noteKey?: string }[][]
+      >
     >
   )[section];
   if (layout) {
     return layout.map((column) =>
-      column.map((p) => panel(p.fields as GuideField[], p.crop as Rect)),
+      column.map((p) =>
+        panel(
+          p.fields as GuideField[],
+          p.crop as Rect,
+          p.noteKey as TranslationKey | undefined,
+        ),
+      ),
     );
   }
   const bySrc = new Map<string, GuideField[]>();

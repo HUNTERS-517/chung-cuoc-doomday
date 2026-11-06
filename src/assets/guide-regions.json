@@ -30,7 +30,8 @@
       ],
       [
         {
-          "fields": ["buyPackage249", "buyDailyDiamonds"]
+          "fields": ["buyPackage249", "buyDailyDiamonds"],
+          "noteKey": "guideCheckboxNote"
         }
       ]
     ]
@@ -97,6 +98,7 @@
       "labelPos": "right",
       "crop": [20, 100, 346, 200],
       "codeNote": "(-1)",
+      "noteKey": "guideGuildLevelNote",
       "notedImage": "param-guild-level_noted.png",
       "focusImage": "param-guild-level_noted.png"
     },
