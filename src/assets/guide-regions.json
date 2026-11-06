@@ -1,0 +1,102 @@
+{
+  "_comment": "Single source of truth for guide hints. `image` is a file in src/assets/base/; box/crop are [x, y, w, h] in source-image pixels; crop (optional) overrides the focus-popover crop area. Run `python scripts/generate_guide_images.py` after editing to regenerate *_noted.png and imageSizes. Optional codeNote is appended to the label on the image (e.g. B2 (-1): the screenshot shows the next guild level).",
+  "fields": {
+    "currentMerit": {
+      "code": "A1",
+      "image": "param-current-merit.png",
+      "box": [168, 174, 58, 18],
+      "labelPos": "left",
+      "notedImage": "param-current-merit_noted.png",
+      "focusImage": "param-current-merit_noted.png"
+    },
+    "maxHpReset": {
+      "code": "A2",
+      "image": "input-4number-1param-rate.png",
+      "box": [284, 440, 54, 20],
+      "notedImage": "input-4number-1param-rate_noted_A.png",
+      "focusImage": "input-4number-1param-rate_noted_A2.png"
+    },
+    "currentHp": {
+      "code": "A3",
+      "image": "input-4number-1param-rate.png",
+      "box": [186, 466, 45, 17],
+      "labelPos": "below",
+      "notedImage": "input-4number-1param-rate_noted_A.png",
+      "focusImage": "input-4number-1param-rate_noted_A3.png"
+    },
+    "hpBackup": {
+      "code": "A4",
+      "image": "input-4number-1param-rate.png",
+      "box": [189, 306, 35, 15],
+      "labelAnchor": "end",
+      "notedImage": "input-4number-1param-rate_noted_A.png",
+      "focusImage": "input-4number-1param-rate_noted_A4.png"
+    },
+    "currentBottles": {
+      "code": "A5",
+      "image": "input-batteries.png",
+      "box": [106, 176, 114, 17],
+      "labelPos": "right",
+      "notedImage": "input-batteries_noted.png",
+      "focusImage": "input-batteries_noted.png"
+    },
+    "recoveryLimit": {
+      "code": "A6",
+      "image": "input-4number-1param-rate.png",
+      "box": [231, 306, 35, 15],
+      "notedImage": "input-4number-1param-rate_noted_A.png",
+      "focusImage": "input-4number-1param-rate_noted_A6.png"
+    },
+    "endDate": {
+      "code": "B1",
+      "image": "param-time.png",
+      "box": [143, 84, 62, 14],
+      "crop": [0, 46, 301, 72],
+      "notedImage": "param-time_noted.png",
+      "focusImage": "param-time_noted.png"
+    },
+    "guildLevel": {
+      "code": "B2",
+      "image": "param-guild-level.png",
+      "box": [32, 108, 86, 460],
+      "labelPos": "right",
+      "crop": [20, 100, 346, 200],
+      "codeNote": "(-1)",
+      "notedImage": "param-guild-level_noted.png",
+      "focusImage": "param-guild-level_noted.png"
+    },
+    "recoveryRate": {
+      "code": "B3",
+      "image": "input-4number-1param-rate.png",
+      "box": [224, 331, 66, 18],
+      "labelPos": "below",
+      "crop": [56, 327, 316, 60],
+      "notedImage": "input-4number-1param-rate_noted_B.png",
+      "focusImage": "input-4number-1param-rate_noted_B.png"
+    },
+    "buyPackage249": {
+      "code": "B4",
+      "image": "checkbox-249-package.png",
+      "box": [126, 506, 114, 32],
+      "notedImage": "checkbox-249-package_noted.png",
+      "focusImage": "checkbox-249-package_noted.png"
+    },
+    "buyDailyDiamonds": {
+      "code": "B5",
+      "image": "checkbox-daily-batteries.png",
+      "box": [8, 224, 387, 96],
+      "labelPos": "inside",
+      "notedImage": "checkbox-daily-batteries_noted.png",
+      "focusImage": "checkbox-daily-batteries_noted.png"
+    }
+  },
+  "imageSizes": {
+    "param-current-merit.png": [393, 195],
+    "input-4number-1param-rate.png": [415, 521],
+    "input-batteries.png": [326, 314],
+    "param-time.png": [301, 164],
+    "param-guild-level.png": [386, 573],
+    "checkbox-249-package.png": [363, 557],
+    "checkbox-daily-batteries.png": [403, 329]
+  }
+}
