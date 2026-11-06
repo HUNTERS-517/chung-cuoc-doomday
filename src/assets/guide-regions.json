@@ -42,54 +42,54 @@
       "image": "param-current-merit.png",
       "box": [168, 174, 58, 18],
       "labelPos": "left",
-      "notedImage": "param-current-merit_noted.png",
-      "focusImage": "param-current-merit_noted.png"
+      "notedImage": "param-current-merit_noted.webp",
+      "focusImage": "param-current-merit_noted.webp"
     },
     "maxHpReset": {
       "code": "A2",
       "image": "input-4number-1param-rate.png",
       "box": [284, 440, 54, 20],
-      "notedImage": "input-4number-1param-rate_noted_A.png",
-      "focusImage": "input-4number-1param-rate_noted_A2.png"
+      "notedImage": "input-4number-1param-rate_noted_A.webp",
+      "focusImage": "input-4number-1param-rate_noted_A2.webp"
     },
     "currentHp": {
       "code": "A3",
       "image": "input-4number-1param-rate.png",
       "box": [186, 466, 45, 17],
       "labelPos": "below",
-      "notedImage": "input-4number-1param-rate_noted_A.png",
-      "focusImage": "input-4number-1param-rate_noted_A3.png"
+      "notedImage": "input-4number-1param-rate_noted_A.webp",
+      "focusImage": "input-4number-1param-rate_noted_A3.webp"
     },
     "hpBackup": {
       "code": "A4",
       "image": "input-4number-1param-rate.png",
       "box": [189, 306, 35, 15],
       "labelAnchor": "end",
-      "notedImage": "input-4number-1param-rate_noted_A.png",
-      "focusImage": "input-4number-1param-rate_noted_A4.png"
+      "notedImage": "input-4number-1param-rate_noted_A.webp",
+      "focusImage": "input-4number-1param-rate_noted_A4.webp"
     },
     "currentBottles": {
       "code": "A5",
       "image": "input-batteries.png",
       "box": [106, 176, 114, 17],
       "labelPos": "right",
-      "notedImage": "input-batteries_noted.png",
-      "focusImage": "input-batteries_noted.png"
+      "notedImage": "input-batteries_noted.webp",
+      "focusImage": "input-batteries_noted.webp"
     },
     "recoveryLimit": {
       "code": "A6",
       "image": "input-4number-1param-rate.png",
       "box": [231, 306, 35, 15],
-      "notedImage": "input-4number-1param-rate_noted_A.png",
-      "focusImage": "input-4number-1param-rate_noted_A6.png"
+      "notedImage": "input-4number-1param-rate_noted_A.webp",
+      "focusImage": "input-4number-1param-rate_noted_A6.webp"
     },
     "endDate": {
       "code": "B1",
       "image": "param-time.png",
       "box": [143, 84, 62, 14],
       "crop": [0, 46, 301, 72],
-      "notedImage": "param-time_noted.png",
-      "focusImage": "param-time_noted.png"
+      "notedImage": "param-time_noted.webp",
+      "focusImage": "param-time_noted.webp"
     },
     "guildLevel": {
       "code": "B2",
@@ -99,8 +99,8 @@
       "crop": [20, 100, 346, 200],
       "codeNote": "(-1)",
       "noteKey": "guideGuildLevelNote",
-      "notedImage": "param-guild-level_noted.png",
-      "focusImage": "param-guild-level_noted.png"
+      "notedImage": "param-guild-level_noted.webp",
+      "focusImage": "param-guild-level_noted.webp"
     },
     "recoveryRate": {
       "code": "B3",
@@ -108,23 +108,23 @@
       "box": [224, 331, 66, 18],
       "labelPos": "below",
       "crop": [56, 327, 316, 60],
-      "notedImage": "input-4number-1param-rate_noted_B.png",
-      "focusImage": "input-4number-1param-rate_noted_B.png"
+      "notedImage": "input-4number-1param-rate_noted_B.webp",
+      "focusImage": "input-4number-1param-rate_noted_B.webp"
     },
     "buyPackage249": {
       "code": "B4",
       "image": "checkbox-249-package.png",
       "box": [126, 506, 114, 32],
-      "notedImage": "checkbox-249-package_noted.png",
-      "focusImage": "checkbox-249-package_noted.png"
+      "notedImage": "checkbox-249-package_noted.webp",
+      "focusImage": "checkbox-249-package_noted.webp"
     },
     "buyDailyDiamonds": {
       "code": "B5",
       "image": "checkbox-daily-batteries.png",
       "box": [8, 224, 387, 96],
       "labelPos": "inside",
-      "notedImage": "checkbox-daily-batteries_noted.png",
-      "focusImage": "checkbox-daily-batteries_noted.png"
+      "notedImage": "checkbox-daily-batteries_noted.webp",
+      "focusImage": "checkbox-daily-batteries_noted.webp"
     }
   },
   "imageSizes": {

@@ -36,7 +36,7 @@ const LABEL_KEYS: Record<GuideField, TranslationKey> = {
   buyDailyDiamonds: 'dailyDiamonds',
 };
 
-const notedImages = import.meta.glob<string>('../../assets/*_noted*.png', {
+const notedImages = import.meta.glob<string>('../../assets/*_noted*.webp', {
   eager: true,
   import: 'default',
 });

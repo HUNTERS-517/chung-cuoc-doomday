@@ -152,12 +152,18 @@ export function GuideButton({
  */
 function PanelImage({ panel }: { panel: GuidePanel }) {
   const alt = panel.fields.map((f) => GUIDE_REGIONS[f].code).join(', ');
-  const [iw] = panel.imageSize;
+  const [iw, ih] = panel.imageSize;
+  // width/height attributes give the <img> its real box before it loads.
+  // Without them a lazy, not-yet-loaded crop image is 0px tall and sits
+  // above its overflow:hidden frame, so Safari never sees it as visible
+  // and never loads it.
   if (!panel.crop) {
     return (
       <img
         src={panel.src}
         alt={alt}
+        width={iw}
+        height={ih}
         loading="lazy"
         className={styles.panelImage}
         style={{ maxWidth: iw }}
@@ -173,6 +179,8 @@ function PanelImage({ panel }: { panel: GuidePanel }) {
       <img
         src={panel.src}
         alt={alt}
+        width={iw}
+        height={ih}
         loading="lazy"
         style={{
           width: `${(iw / w) * 100}%`,
