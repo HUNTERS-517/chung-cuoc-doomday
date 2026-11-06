@@ -4,7 +4,9 @@
   padding: 22px;
 }
 .textButton {
-  padding: 5px;
+  flex-shrink: 0;
+  padding: 5px 0;
+  white-space: nowrap;
   border: 0;
   color: var(--primary);
   background: transparent;
@@ -38,6 +40,11 @@
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin: 17px 0 12px;
+}
+/* Labels share the top line, inputs share the bottom line, even when one
+   label wraps. */
+.fieldGrid > label {
+  grid-template-rows: 1fr auto;
 }
 .timePanel {
   padding: 13px 14px;

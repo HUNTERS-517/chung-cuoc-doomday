@@ -3,6 +3,9 @@ import type { TranslationKey } from '../i18n';
 import { useCalculator } from '../context/CalculatorContext';
 import { useTranslation } from '../context/LocaleContext';
 import { cx } from '../shared/cx';
+import { GuideBadge, GuideHeading, useGuideFocusHint } from './Guide/Guide';
+import { ACCOUNT_GUIDE_FIELDS } from './Guide/guideData';
+import { CautionButton } from './Guide/CautionButton';
 import shared from './shared.module.css';
 import styles from './AccountInputs.module.css';
 
@@ -23,16 +26,22 @@ const fields: Array<{ field: NumericField; label: TranslationKey }> = [
 export function AccountInputs({ onChange, onBlur }: AccountInputsProps) {
   const { config } = useCalculator();
   const t = useTranslation();
+  const hint = useGuideFocusHint();
   return (
     <section className={cx(shared.card, styles.accountCard)}>
       <div className={shared.sectionHeading}>
-        <h2>{t('accountData')}</h2>
+        <GuideHeading title={t('accountData')} fields={ACCOUNT_GUIDE_FIELDS}>
+          <CautionButton />
+        </GuideHeading>
         <span className={shared.sectionIndex}>01</span>
       </div>
       <div className={styles.accountGrid}>
         {fields.map(({ field, label }) => (
-          <label className={shared.field} key={field}>
-            <span>{t(label)}</span>
+          <label className={shared.field} key={field} {...hint.bind(field)}>
+            <span>
+              {t(label)}
+              <GuideBadge field={field} />
+            </span>
             <input
               inputMode="decimal"
               value={config[field] as string}
@@ -44,6 +53,7 @@ export function AccountInputs({ onChange, onBlur }: AccountInputsProps) {
           </label>
         ))}
       </div>
+      {hint.popover}
     </section>
   );
 }

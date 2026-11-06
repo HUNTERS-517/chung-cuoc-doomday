@@ -27,22 +27,24 @@ export function createDefaultFormValue(
 /** Starter profiles shown when nothing is saved yet. */
 export function createDefaultProfiles(): CalculatorConfig[] {
   return [
-    {
-      ...createDefaultFormValue(),
-      name: 'Vòng Loại',
-      endDate: '2026-11-04',
-      guildLevel: '27',
-      maxGuildLevel: 27,
-    },
+    // {
+    //   ...createDefaultFormValue(),
+    //   name: 'Vòng Loại',
+    //   endDate: '2026-11-04',
+    //   guildLevel: '27',
+    //   maxGuildLevel: 27,
+    // },
     {
       ...createDefaultFormValue(),
       name: 'Vòng Chính',
       endDate: '2026-11-08',
-      guildLevel: '0',
+      guildLevel: '27',
       currentMerit: '0',
-      hpBackup: '0',
-      currentBottles: '0',
-      currentHp: '237479',
+      hpBackup: '180955',
+      currentBottles: '3239',
+      currentHp: '243500',
+      maxHpReset: '243588',
+      recoveryLimit: '974352',
     },
   ];
 }
