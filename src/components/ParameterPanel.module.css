@@ -39,6 +39,11 @@
   gap: 10px;
   margin: 17px 0 12px;
 }
+/* Labels share the top line, inputs share the bottom line, even when one
+   label wraps. */
+.fieldGrid > label {
+  grid-template-rows: 1fr auto;
+}
 .timePanel {
   padding: 13px 14px;
   display: grid;

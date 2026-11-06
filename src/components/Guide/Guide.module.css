@@ -1,0 +1,159 @@
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 16px;
+  padding: 0 4px;
+  border: 1px solid #b3d4f2;
+  border-radius: 5px;
+  color: #2f5878;
+  background: #cfe7fd;
+  font: 800 0.62rem/1 monospace;
+  letter-spacing: 0.02em;
+  vertical-align: 1px;
+}
+.badgeInline {
+  margin-left: 6px;
+}
+
+.headingGroup {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.guideButton {
+  padding: 4px 9px;
+  border: 1px solid #b3d4f2;
+  border-radius: 999px;
+  color: #2f5878;
+  background: #e6f2fe;
+  font-size: 0.68rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.guideButton:hover {
+  background: #cfe7fd;
+}
+
+.dialog {
+  width: min(960px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  padding: 18px 20px 22px;
+  border: 0;
+  border-radius: var(--radius, 14px);
+  color: var(--ink, #17221e);
+  background: var(--paper, #fff);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
+}
+.dialog::backdrop {
+  background: rgba(10, 20, 16, 0.55);
+}
+.dialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.dialogHeader h3 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.closeButton {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: #eef1ee;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.dialogIntro {
+  margin: 6px 0 14px;
+  color: #5b6762;
+  font-size: 0.75rem;
+}
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+.figure {
+  margin: 0;
+}
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.figure figcaption {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.dialogCompact {
+  width: min(640px, calc(100vw - 32px));
+}
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: 12px;
+}
+.card {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #e3e8e4;
+  border-radius: 10px;
+  background: #f7f9f7;
+}
+.cardCaption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.focusPopover {
+  position: fixed;
+  z-index: 1000;
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #52738c;
+  border-radius: 10px;
+  color: #fff;
+  background: #193d59;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  font:
+    600 0.72rem/1.4 Inter,
+    sans-serif;
+  pointer-events: none;
+}
+.focusCaption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.crop {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.crop img {
+  position: absolute;
+  max-width: none;
+  height: auto;
+}

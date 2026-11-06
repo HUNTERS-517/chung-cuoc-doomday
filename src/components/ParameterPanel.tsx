@@ -3,6 +3,8 @@ import type { CalculatorConfig } from '../domain/types';
 import { useCalculator } from '../context/CalculatorContext';
 import { useFormat, useTranslation } from '../context/LocaleContext';
 import { cx } from '../shared/cx';
+import { GuideBadge, GuideHeading, useGuideFocusHint } from './Guide/Guide';
+import { PARAMETER_GUIDE_FIELDS } from './Guide/guideData';
 import shared from './shared.module.css';
 import styles from './ParameterPanel.module.css';
 
@@ -22,6 +24,7 @@ export function ParameterPanel({
   const { config, result } = useCalculator();
   const t = useTranslation();
   const format = useFormat();
+  const hint = useGuideFocusHint();
   if (collapsed) {
     return (
       <button type="button" className={styles.expandButton} onClick={onToggle}>
@@ -34,15 +37,22 @@ export function ParameterPanel({
   return (
     <aside className={cx(shared.card, styles.panel)}>
       <div className={shared.sectionHeading}>
-        <h2>{t('parameters')}</h2>
+        <GuideHeading
+          title={t('parameters')}
+          fields={PARAMETER_GUIDE_FIELDS}
+          compact
+        />
         <button type="button" className={styles.textButton} onClick={onToggle}>
           {t('collapse')} ←
         </button>
       </div>
 
       <div className={styles.fieldStack}>
-        <label className={shared.field}>
-          <span>{t('endDate')}</span>
+        <label className={shared.field} {...hint.bind('endDate')}>
+          <span>
+            {t('endDate')}
+            <GuideBadge field="endDate" />
+          </span>
           <input
             type="date"
             value={config.endDate}
@@ -62,8 +72,11 @@ export function ParameterPanel({
       </div>
 
       <div className={styles.fieldGrid}>
-        <label className={shared.field}>
-          <span>{t('currentGuildLevel')}</span>
+        <label className={shared.field} {...hint.bind('guildLevel')}>
+          <span>
+            {t('currentGuildLevel')}
+            <GuideBadge field="guildLevel" />
+          </span>
           <input
             inputMode="decimal"
             value={config.guildLevel}
@@ -85,8 +98,11 @@ export function ParameterPanel({
         </label>
       </div>
 
-      <label className={shared.field}>
-        <span>{t('hpRecoveryRate')}</span>
+      <label className={shared.field} {...hint.bind('recoveryRate')}>
+        <span>
+          {t('hpRecoveryRate')}
+          <GuideBadge field="recoveryRate" />
+        </span>
         <select
           value={config.recoveryRate}
           onChange={(event) =>
@@ -109,7 +125,7 @@ export function ParameterPanel({
       <div className={styles.ruleBlock}>
         <p className={styles.miniHeading}>{t('otherRules')}</p>
         <p className={styles.ruleCallout}>{t('bottleRate')}</p>
-        <label className={styles.checkRow}>
+        <label className={styles.checkRow} {...hint.bind('buyPackage249')}>
           <input
             type="checkbox"
             checked={config.buyPackage249}
@@ -117,9 +133,12 @@ export function ParameterPanel({
               onChange({ buyPackage249: event.target.checked })
             }
           />
-          <span>{t('package249')}</span>
+          <span>
+            {t('package249')}
+            <GuideBadge field="buyPackage249" />
+          </span>
         </label>
-        <label className={styles.checkRow}>
+        <label className={styles.checkRow} {...hint.bind('buyDailyDiamonds')}>
           <input
             type="checkbox"
             checked={config.buyDailyDiamonds}
@@ -127,13 +146,17 @@ export function ParameterPanel({
               onChange({ buyDailyDiamonds: event.target.checked })
             }
           />
-          <span>{t('dailyDiamonds')}</span>
+          <span>
+            {t('dailyDiamonds')}
+            <GuideBadge field="buyDailyDiamonds" />
+          </span>
         </label>
         <div className={styles.ruleNotes}>
           <span>{t('dailyHint')}</span>
           <span>{t('packageHint')}</span>
         </div>
       </div>
+      {hint.popover}
     </aside>
   );
 }
