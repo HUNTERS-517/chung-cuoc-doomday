@@ -1,8 +1,10 @@
 import type { CalculatorConfig, Locale } from '../domain/types';
 import { useI18n } from '../context/LocaleContext';
 import { cx } from '../shared/cx';
-import hpBottle from '../assets/hp-bottle.png';
+import { appIcon } from '../shared/appIcon';
 import styles from './Header.module.css';
+
+const brandIcon = `${import.meta.env.BASE_URL}${appIcon(import.meta.env.DEV)}`;
 
 const localeLabels: Record<Locale, string> = {
   vi: 'VN',
@@ -37,7 +39,7 @@ export function Header({
   return (
     <header className={styles.topbar}>
       <div className={styles.topbarBrand}>
-        <img className={styles.brandMark} src={hpBottle} alt="" />
+        <img className={styles.brandMark} src={brandIcon} alt="" />
 
         <div>
           <h1>{t('appTitle')}</h1>
