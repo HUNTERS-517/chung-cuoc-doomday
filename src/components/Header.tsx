@@ -41,8 +41,8 @@ export function Header({
 
         <div>
           <h1>{t('appTitle')}</h1>
-          {/* Easter egg: Dev's in-game ID */}
-          <p id="51921435" className={styles.devSignature}>
+          {/* Easter egg: Dev's in-game ID, shown as a tiny watermark via CSS attr() */}
+          <p data-dev-ingame-id="51921435" className={styles.devSignature}>
             From <strong>HUNTERS [S517]</strong> with ❤️
           </p>
         </div>
