@@ -1,10 +1,17 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import type { CSSProperties, FocusEvent, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from '../../context/LocaleContext';
 import { GUIDE_REGIONS, panelsFor } from './guideData';
 import type { GuideField, GuidePanel } from './guideData';
 import { cx } from '../../shared/cx';
+import { focusHintPosition } from './focusHintPosition';
 import styles from './Guide.module.css';
 
 /** Small red code badge ("A1") shown next to a field label. */
@@ -274,18 +281,48 @@ export function useGuideFocusHint() {
     field: GuideField;
     target: HTMLElement;
   } | null>(null);
-  const [, setTick] = useState(0);
+  const [tick, setTick] = useState(0);
+  const popoverRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (!active) return;
     const reposition = () => setTick((n) => n + 1);
     window.addEventListener('scroll', reposition, true);
     window.addEventListener('resize', reposition);
+    const viewport = window.visualViewport;
+    viewport?.addEventListener('scroll', reposition);
+    viewport?.addEventListener('resize', reposition);
     return () => {
       window.removeEventListener('scroll', reposition, true);
       window.removeEventListener('resize', reposition);
+      viewport?.removeEventListener('scroll', reposition);
+      viewport?.removeEventListener('resize', reposition);
     };
   }, [active]);
+
+  useLayoutEffect(() => {
+    const element = popoverRef.current;
+    if (!active || !element) return;
+    const viewport = window.visualViewport;
+    const bounds = {
+      top: viewport?.offsetTop ?? 0,
+      left: viewport?.offsetLeft ?? 0,
+      width: viewport?.width ?? window.innerWidth,
+      height: viewport?.height ?? window.innerHeight,
+    };
+    element.style.maxWidth = `${Math.min(MAX_CROP_WIDTH + 22, bounds.width - 24)}px`;
+    // Measure the actual caption and crop, including wrapped translations.
+    element.style.maxHeight = 'none';
+    const position = focusHintPosition(
+      active.target.getBoundingClientRect(),
+      bounds,
+      element.getBoundingClientRect(),
+    );
+    element.style.left = `${position.left}px`;
+    element.style.top = `${position.top}px`;
+    element.style.maxHeight = `${position.height}px`;
+    element.style.visibility = position.visible ? 'visible' : 'hidden';
+  }, [active, tick, t]);
 
   const bind = useCallback(
     (field: GuideField) => ({
@@ -298,24 +335,9 @@ export function useGuideFocusHint() {
 
   let popover = null;
   if (active) {
-    const rect = active.target.getBoundingClientRect();
     const r = GUIDE_REGIONS[active.field];
-    const width = Math.min(MAX_CROP_WIDTH + 20, window.innerWidth - 24);
-    const below = window.innerHeight - rect.bottom > MAX_CROP_HEIGHT + 60;
     popover = createPortal(
-      <span
-        className={styles.focusPopover}
-        role="tooltip"
-        style={{
-          maxWidth: width,
-          left: Math.max(
-            12,
-            Math.min(rect.left, window.innerWidth - width - 12),
-          ),
-          top: below ? rect.bottom + 8 : rect.top - 8,
-          transform: below ? undefined : 'translateY(-100%)',
-        }}
-      >
+      <span ref={popoverRef} className={styles.focusPopover} role="tooltip">
         <span className={styles.focusCaption}>
           <span className={styles.badge}>{r.code}</span>
           {t(r.labelKey)}
