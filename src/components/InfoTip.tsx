@@ -1,5 +1,6 @@
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useRowHoverTip } from './useRowHoverTip';
 import styles from './InfoTip.module.css';
 
 interface InfoTipProps {
@@ -8,11 +9,16 @@ interface InfoTipProps {
 
 export function InfoTip({ label }: InfoTipProps) {
   const id = useId();
+  const iconRef = useRef<HTMLSpanElement>(null);
   const [anchor, setAnchor] = useState<DOMRect | null>(null);
+
+  const open = () => {
+    if (iconRef.current) setAnchor(iconRef.current.getBoundingClientRect());
+  };
+  const close = () => setAnchor(null);
 
   useEffect(() => {
     if (!anchor) return;
-    const close = () => setAnchor(null);
     window.addEventListener('scroll', close, true);
     window.addEventListener('resize', close);
     return () => {
@@ -21,28 +27,25 @@ export function InfoTip({ label }: InfoTipProps) {
     };
   }, [anchor]);
 
+  const rowHover = useRowHoverTip(iconRef, open, close);
+
   const width = Math.min(360, window.innerWidth - 24);
   const below = anchor !== null && anchor.top < 200;
 
   return (
     <span
+      ref={iconRef}
       className={styles.infoTip}
       tabIndex={0}
       aria-label={label}
       aria-describedby={anchor ? id : undefined}
-      onMouseEnter={(event) =>
-        setAnchor(event.currentTarget.getBoundingClientRect())
-      }
-      onMouseLeave={() => setAnchor(null)}
-      onFocus={(event) =>
-        setAnchor(event.currentTarget.getBoundingClientRect())
-      }
-      onBlur={() => setAnchor(null)}
-      onClick={(event) =>
-        setAnchor(event.currentTarget.getBoundingClientRect())
-      }
+      onMouseEnter={open}
+      onMouseLeave={rowHover ? undefined : close}
+      onFocus={open}
+      onBlur={close}
+      onClick={open}
       onKeyDown={(event) => {
-        if (event.key === 'Escape') setAnchor(null);
+        if (event.key === 'Escape') close();
       }}
     >
       i
