@@ -1,5 +1,5 @@
-"""Generate `<name>_noted.png` guide images from src/assets/base/<name>.png (`<name>_noted_<A|B>.png` when an
-image holds fields from both sections) from src/assets/guide-regions.json.
+"""Generate `<name>_noted.webp` guide images in src/assets from scripts/guide-src/<name>.png
+(`<name>_noted_<A|B>.webp` when an image holds fields from both sections) using src/assets/guide-regions.json.
 
 Each region gets a red outline plus a red code label ("A4"); no localized text so it works for every language.
 Also records each image size in guide-regions.json (`imageSizes`) for UI cropping.
@@ -15,8 +15,10 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "src" / "assets"
-# Untouched screenshots; annotated copies are written next to ASSETS.
-BASE = ASSETS / "base"
+# Untouched source screenshots; not used by the app, so kept out of src/.
+BASE = ROOT / "scripts" / "guide-src"
+# WebP keeps the screenshot text sharp at a fraction of the PNG size.
+WEBP_QUALITY = 85
 RED = (230, 30, 40, 255)
 WHITE = (255, 255, 255, 255)
 BORDER = 4
@@ -85,7 +87,7 @@ def annotate(src: Path, fields, font) -> Image.Image:
 
 
 def save(img: Image.Image, out: Path) -> None:
-    img.convert("RGB").save(out, optimize=True)
+    img.convert("RGB").save(out, "WEBP", quality=WEBP_QUALITY, method=6)
     print(f"wrote {out.relative_to(ROOT)}")
 
 
@@ -100,7 +102,7 @@ def main() -> None:
         by_image[(field["image"], section)].append(field)
         sections[field["image"]].add(section)
 
-    for stale in ASSETS.glob("*_noted*.png"):
+    for stale in ASSETS.glob("*_noted*.*"):
         stale.unlink()
 
     font = load_font(22)
@@ -111,7 +113,7 @@ def main() -> None:
 
         # Section image: used by the section's guide dialog.
         suffix = f"_{section}" if len(sections[image_name]) > 1 else ""
-        out = ASSETS / f"{src.stem}_noted{suffix}.png"
+        out = ASSETS / f"{src.stem}_noted{suffix}.webp"
         save(annotate(src, fields, font), out)
         for f in fields:
             f["notedImage"] = out.name
@@ -121,7 +123,7 @@ def main() -> None:
         # hint gets a copy showing only its own box.
         if len(fields) > 1:
             for f in fields:
-                focus_out = ASSETS / f"{src.stem}_noted_{f['code']}.png"
+                focus_out = ASSETS / f"{src.stem}_noted_{f['code']}.webp"
                 save(annotate(src, [f], font), focus_out)
                 f["focusImage"] = focus_out.name
 
