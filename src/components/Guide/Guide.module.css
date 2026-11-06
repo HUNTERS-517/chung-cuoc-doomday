@@ -166,9 +166,14 @@
 .dialogCaution {
   width: min(720px, calc(100vw - 32px));
 }
-.cardGrid {
+/* Columns size independently so cards stagger instead of row-aligning. */
+.cardColumns {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.cardColumns .column {
   gap: 12px;
 }
 .card {

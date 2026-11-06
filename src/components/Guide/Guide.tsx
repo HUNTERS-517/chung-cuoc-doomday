@@ -19,7 +19,8 @@ export function GuideBadge({ field }: { field: GuideField }) {
 /**
  * "Guide" button that opens a dialog with the annotated screenshots.
  * `compact` shows one card per field using the same crop as the focus hint
- * (good when each field lives on its own screenshot).
+ * (good when each field lives on its own screenshot), stacked in the
+ * columns given by the section's `panels` layout.
  */
 export function GuideButton({
   fields,
@@ -70,21 +71,27 @@ export function GuideButton({
         </div>
         <p className={styles.dialogIntro}>{t('guideIntro')}</p>
         {compact ? (
-          <div className={styles.cardGrid}>
-            {fields.map((field) => (
-              <figure key={field} className={styles.card}>
-                <figcaption className={styles.cardCaption}>
-                  <span className={styles.badge}>
-                    {GUIDE_REGIONS[field].code}
-                  </span>
-                  {t(GUIDE_REGIONS[field].labelKey)}
-                </figcaption>
-                <GuideCrop
-                  field={field}
-                  maxScale={1}
-                  maxWidth={COMPACT_CROP_WIDTH}
-                />
-              </figure>
+          <div className={styles.cardColumns}>
+            {columns.map((column) => (
+              <div key={column[0].fields[0]} className={styles.column}>
+                {column
+                  .flatMap((panel) => panel.fields)
+                  .map((field) => (
+                    <figure key={field} className={styles.card}>
+                      <figcaption className={styles.cardCaption}>
+                        <span className={styles.badge}>
+                          {GUIDE_REGIONS[field].code}
+                        </span>
+                        {t(GUIDE_REGIONS[field].labelKey)}
+                      </figcaption>
+                      <GuideCrop
+                        field={field}
+                        maxScale={1}
+                        maxWidth={COMPACT_CROP_WIDTH}
+                      />
+                    </figure>
+                  ))}
+              </div>
             ))}
           </div>
         ) : (

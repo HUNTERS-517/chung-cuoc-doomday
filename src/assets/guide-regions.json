@@ -21,6 +21,18 @@
           "crop": [0, 0, 326, 208]
         }
       ]
+    ],
+    "B": [
+      [
+        {
+          "fields": ["endDate", "guildLevel", "recoveryRate"]
+        }
+      ],
+      [
+        {
+          "fields": ["buyPackage249", "buyDailyDiamonds"]
+        }
+      ]
     ]
   },
   "fields": {
