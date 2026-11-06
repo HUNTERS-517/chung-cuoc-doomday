@@ -7,6 +7,7 @@ Usage: python scripts/generate_guide_images.py   (requires Pillow)
 """
 
 import json
+import re
 from collections import defaultdict
 from pathlib import Path
 
@@ -126,9 +127,16 @@ def main() -> None:
 
     # The UI needs natural sizes to crop regions without waiting for image load.
     config["imageSizes"] = sizes
-    (ASSETS / "guide-regions.json").write_text(
-        json.dumps(config, ensure_ascii=False, indent=2) + "\n", "utf-8"
+    text = json.dumps(config, ensure_ascii=False, indent=2)
+    # Keep flat arrays ([x, y, w, h] rects, field lists) on one line so hand
+    # edits stay readable and regenerating doesn't reformat the whole file.
+    text = re.sub(
+        r"\[([^\[\]{}]*)\]",
+        lambda m: "[" + re.sub(r"\s*\n\s*", " ", m.group(1)).strip() + "]",
+        text,
     )
+    # LF endings so Prettier (lint-staged) leaves the file alone on Windows.
+    (ASSETS / "guide-regions.json").write_text(text + "\n", "utf-8", newline="\n")
 
 
 if __name__ == "__main__":

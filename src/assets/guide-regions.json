@@ -1,5 +1,28 @@
 {
-  "_comment": "Single source of truth for guide hints. `image` is a file in src/assets/base/; box/crop are [x, y, w, h] in source-image pixels; crop (optional) overrides the focus-popover crop area. Run `python scripts/generate_guide_images.py` after editing to regenerate *_noted.png and imageSizes. Optional codeNote is appended to the label on the image (e.g. B2 (-1): the screenshot shows the next guild level).",
+  "_comment": "Single source of truth for guide hints. `image` is a file in src/assets/base/; box/crop are [x, y, w, h] in source-image pixels; crop (optional) overrides the focus-popover crop area. Run `python scripts/generate_guide_images.py` after editing to regenerate *_noted.png and imageSizes. Optional codeNote is appended to the label on the image (e.g. B2 (-1): the screenshot shows the next guild level). Optional `panels` (section letter -> columns -> [{fields, crop?}]) lays out that section's guide dialog; crop [x, y, w, h] trims the section image shown for those fields.",
+  "panels": {
+    "A": [
+      [
+        {
+          "fields": ["currentMerit"]
+        },
+        {
+          "fields": ["maxHpReset", "currentHp"],
+          "crop": [0, 380, 415, 141]
+        }
+      ],
+      [
+        {
+          "fields": ["hpBackup", "recoveryLimit"],
+          "crop": [0, 262, 415, 108]
+        },
+        {
+          "fields": ["currentBottles"],
+          "crop": [0, 0, 326, 208]
+        }
+      ]
+    ]
+  },
   "fields": {
     "currentMerit": {
       "code": "A1",

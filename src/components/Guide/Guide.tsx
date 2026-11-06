@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { FocusEvent, ReactNode } from 'react';
+import type { CSSProperties, FocusEvent, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from '../../context/LocaleContext';
-import { GUIDE_REGIONS, imagesFor } from './guideData';
-import type { GuideField } from './guideData';
+import { GUIDE_REGIONS, panelsFor } from './guideData';
+import type { GuideField, GuidePanel } from './guideData';
 import { cx } from '../../shared/cx';
 import styles from './Guide.module.css';
 
@@ -32,7 +32,7 @@ export function GuideButton({
 }) {
   const t = useTranslation();
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const images = imagesFor(fields);
+  const columns = panelsFor(fields);
 
   return (
     <>
@@ -45,7 +45,10 @@ export function GuideButton({
       </button>
       <dialog
         ref={dialogRef}
-        className={cx(styles.dialog, compact && styles.dialogCompact)}
+        className={cx(
+          styles.dialog,
+          compact ? styles.dialogCompact : styles.dialogFit,
+        )}
         aria-label={title}
         onClick={(event) => {
           // Clicking the backdrop (the dialog element itself) closes it.
@@ -85,27 +88,63 @@ export function GuideButton({
             ))}
           </div>
         ) : (
-          <div className={styles.imageGrid}>
-            {images.map(({ src, fields: imageFields }) => (
-              <figure key={src} className={styles.figure}>
-                <img
-                  src={src}
-                  alt={imageFields.map((f) => GUIDE_REGIONS[f].code).join(', ')}
-                  loading="lazy"
-                />
-                <figcaption>
-                  {imageFields.map((f) => (
-                    <span key={f} className={styles.badge}>
-                      {GUIDE_REGIONS[f].code}
-                    </span>
-                  ))}
-                </figcaption>
-              </figure>
+          <div
+            className={styles.imageGrid}
+            style={
+              {
+                '--cols': Math.min(columns.length, 3),
+                '--cols-md': Math.min(columns.length, 2),
+              } as CSSProperties
+            }
+          >
+            {columns.map((column) => (
+              <div key={column[0].fields[0]} className={styles.column}>
+                {column.map((panel) => (
+                  <figure
+                    key={panel.fields[0]}
+                    className={cx(styles.card, styles.figure)}
+                  >
+                    <figcaption className={styles.figureLegend}>
+                      {panel.fields.map((f) => (
+                        <span key={f} className={styles.cardCaption}>
+                          <span className={styles.badge}>
+                            {GUIDE_REGIONS[f].code}
+                          </span>
+                          {t(GUIDE_REGIONS[f].labelKey)}
+                        </span>
+                      ))}
+                    </figcaption>
+                    <PanelImage panel={panel} />
+                  </figure>
+                ))}
+              </div>
             ))}
           </div>
         )}
       </dialog>
     </>
+  );
+}
+
+/** Full-width annotated image, trimmed to `panel.crop` when set (responsive). */
+function PanelImage({ panel }: { panel: GuidePanel }) {
+  const alt = panel.fields.map((f) => GUIDE_REGIONS[f].code).join(', ');
+  if (!panel.crop) return <img src={panel.src} alt={alt} loading="lazy" />;
+  const [iw, ih] = panel.imageSize;
+  const [x, y, w, h] = panel.crop;
+  return (
+    <span className={styles.panelCrop} style={{ aspectRatio: `${w} / ${h}` }}>
+      <img
+        src={panel.src}
+        alt={alt}
+        loading="lazy"
+        style={{
+          width: `${(iw / w) * 100}%`,
+          left: `${(-x / w) * 100}%`,
+          top: `${(-y / h) * 100}%`,
+        }}
+      />
+    </span>
   );
 }
 

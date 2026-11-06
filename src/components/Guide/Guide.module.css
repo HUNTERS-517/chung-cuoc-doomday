@@ -95,14 +95,42 @@
   color: #5b6762;
   font-size: 0.75rem;
 }
+/* Dialog shrinks to its columns instead of leaving empty tracks. */
+.dialogFit {
+  width: fit-content;
+  max-width: calc(100vw - 32px);
+}
+/* Intro wraps to the grid width instead of widening the dialog. */
+.dialogFit .dialogIntro {
+  width: 0;
+  min-width: 100%;
+}
 .imageGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 14px;
+  /* --cols / --cols-md are set from the real column count (Guide.tsx). */
+  grid-template-columns: repeat(var(--cols, 2), 300px);
+  gap: 14px 24px;
   align-items: start;
 }
-.figure {
-  margin: 0;
+@media (max-width: 1040px) {
+  .imageGrid {
+    grid-template-columns: repeat(var(--cols-md, 2), 300px);
+  }
+}
+@media (max-width: 720px) {
+  .dialogFit {
+    width: calc(100vw - 32px);
+  }
+  .imageGrid {
+    grid-template-columns: 1fr;
+  }
+}
+.column {
+  display: grid;
+  gap: 14px;
+}
+.card.figure {
+  justify-items: stretch;
 }
 .figure img {
   display: block;
@@ -110,10 +138,20 @@
   height: auto;
   border-radius: 8px;
 }
-.figure figcaption {
-  display: flex;
+.panelCrop {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.figure .panelCrop img {
+  position: absolute;
+  max-width: none;
+  border-radius: 0;
+}
+.figureLegend {
+  display: grid;
   gap: 4px;
-  margin-top: 6px;
 }
 
 .dialogCompact {

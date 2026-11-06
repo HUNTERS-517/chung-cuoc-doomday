@@ -82,12 +82,39 @@ export const PARAMETER_GUIDE_FIELDS: GuideField[] = [
   'buyDailyDiamonds',
 ];
 
-/** Distinct annotated images used by a set of fields, in field order. */
-export function imagesFor(fields: GuideField[]) {
+/** One annotated image (optionally cropped) plus the fields it explains. */
+export interface GuidePanel {
+  src: string;
+  imageSize: [number, number];
+  fields: GuideField[];
+  crop?: Rect;
+}
+
+/**
+ * Guide-dialog columns for a set of fields. Uses the section's `panels`
+ * layout from guide-regions.json when present; otherwise one column per
+ * distinct annotated image, in field order.
+ */
+export function panelsFor(fields: GuideField[]): GuidePanel[][] {
+  const panel = (panelFields: GuideField[], crop?: Rect): GuidePanel => {
+    const { src, imageSize } = GUIDE_REGIONS[panelFields[0]];
+    return { src, imageSize, fields: panelFields, crop };
+  };
+  const section = GUIDE_REGIONS[fields[0]].code[0];
+  const layout = (
+    regions.panels as Partial<
+      Record<string, { fields: string[]; crop?: number[] }[][]>
+    >
+  )[section];
+  if (layout) {
+    return layout.map((column) =>
+      column.map((p) => panel(p.fields as GuideField[], p.crop as Rect)),
+    );
+  }
   const bySrc = new Map<string, GuideField[]>();
   for (const field of fields) {
     const { src } = GUIDE_REGIONS[field];
     bySrc.set(src, [...(bySrc.get(src) ?? []), field]);
   }
-  return [...bySrc].map(([src, imageFields]) => ({ src, fields: imageFields }));
+  return [...bySrc.values()].map((imageFields) => [panel(imageFields)]);
 }
