@@ -1,23 +1,16 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useRowHoverTip } from './useRowHoverTip';
 import styles from './InfoTip.module.css';
 
 interface InfoTipProps {
   label: string;
 }
 
-/** Rows marked with this attribute open their InfoTip on hover (desktop only). */
-const TIP_ROW_ATTR = 'data-tip-row';
-
-const canHover = () =>
-  typeof window.matchMedia === 'function' &&
-  window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
 export function InfoTip({ label }: InfoTipProps) {
   const id = useId();
   const iconRef = useRef<HTMLSpanElement>(null);
   const [anchor, setAnchor] = useState<DOMRect | null>(null);
-  const [rowHover, setRowHover] = useState(false);
 
   const open = () => {
     if (iconRef.current) setAnchor(iconRef.current.getBoundingClientRect());
@@ -34,18 +27,7 @@ export function InfoTip({ label }: InfoTipProps) {
     };
   }, [anchor]);
 
-  // Desktop: hovering the whole row (not just the icon) shows the formula.
-  useEffect(() => {
-    const row = iconRef.current?.closest<HTMLElement>(`[${TIP_ROW_ATTR}]`);
-    if (!row || !canHover()) return;
-    setRowHover(true);
-    row.addEventListener('mouseenter', open);
-    row.addEventListener('mouseleave', close);
-    return () => {
-      row.removeEventListener('mouseenter', open);
-      row.removeEventListener('mouseleave', close);
-    };
-  }, []);
+  const rowHover = useRowHoverTip(iconRef, open, close);
 
   const width = Math.min(360, window.innerWidth - 24);
   const below = anchor !== null && anchor.top < 200;
@@ -57,7 +39,7 @@ export function InfoTip({ label }: InfoTipProps) {
       tabIndex={0}
       aria-label={label}
       aria-describedby={anchor ? id : undefined}
-      onMouseEnter={rowHover ? undefined : open}
+      onMouseEnter={open}
       onMouseLeave={rowHover ? undefined : close}
       onFocus={open}
       onBlur={close}
