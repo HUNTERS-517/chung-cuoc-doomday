@@ -61,10 +61,13 @@
   min-width: 0;
 }
 .configArea {
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
   min-width: 0;
 }
 .controlLabel {
+  margin-right: 4px;
   color: #a9bbb4;
   font-size: 0.72rem;
   font-weight: 700;
@@ -80,29 +83,24 @@
 }
 .configSave {
   flex-shrink: 0;
-  height: 34px;
-  padding: 0 12px;
+  height: 26px;
+  padding: 0 10px;
   border: 1px solid rgba(185, 220, 104, 0.5);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--accent);
   background: rgba(185, 220, 104, 0.1);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 800;
 }
 .configSave:hover {
   background: rgba(185, 220, 104, 0.2);
-}
-.configDivider {
-  flex: 0 0 1px;
-  height: 26px;
-  margin: 0 5px;
-  background: rgba(255, 255, 255, 0.3);
 }
 .configTabs {
   display: flex;
   gap: 6px;
   min-width: 0;
   max-width: min(36vw, 520px);
+  margin-left: -3px;
   padding: 3px;
   overflow-x: auto;
   scrollbar-width: thin;
@@ -249,17 +247,7 @@
     grid-template-columns: minmax(0, 1fr) auto;
   }
   .configArea {
-    display: grid;
-    grid-template-columns: auto auto auto minmax(0, 1fr);
-    align-items: center;
-    justify-items: start;
-    gap: 5px 6px;
-  }
-  .configActions {
-    display: contents;
-  }
-  .controlLabel {
-    margin-right: 4px;
+    gap: 5px;
   }
   .configSave {
     height: 24px;
@@ -267,12 +255,8 @@
     border-radius: 7px;
     font-size: 0.66rem;
   }
-  .configDivider {
-    display: none;
-  }
   .configTabs {
-    grid-column: 1 / -1;
-    max-width: calc(100vw - 220px);
+    max-width: 100%;
   }
   .headerMeta {
     flex-direction: column;
@@ -298,8 +282,5 @@
   .topbarControls {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 10px;
-  }
-  .configTabs {
-    max-width: calc(100vw - 182px);
   }
 }

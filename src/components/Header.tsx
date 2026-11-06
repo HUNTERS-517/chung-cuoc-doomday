@@ -50,8 +50,8 @@ export function Header({
 
       <div className={styles.topbarControls}>
         <div className={styles.configArea}>
-          <span className={styles.controlLabel}>{t('profile')}</span>
           <div className={styles.configActions}>
+            <span className={styles.controlLabel}>{t('profile')}</span>
             <button
               type="button"
               className={styles.configSave}
@@ -69,38 +69,37 @@ export function Header({
             >
               {t('save')}
             </button>
-            <span className={styles.configDivider} aria-hidden="true" />
-            <div
-              className={styles.configTabs}
-              role="tablist"
-              aria-label={t('profile')}
-            >
-              {profiles.map(({ id, name }, index) => (
-                <button
-                  key={id}
-                  type="button"
-                  role="tab"
-                  aria-selected={id === activeId}
-                  className={cx(
-                    styles.configTab,
-                    id === activeId && styles.isActive,
-                  )}
-                  onClick={() => onSelect(id)}
-                  title={name || (id === activeId ? t('selected') : undefined)}
-                >
-                  {name || index + 1}
-                </button>
-              ))}
+          </div>
+          <div
+            className={styles.configTabs}
+            role="tablist"
+            aria-label={t('profile')}
+          >
+            {profiles.map(({ id, name }, index) => (
               <button
+                key={id}
                 type="button"
-                className={cx(styles.configTab, styles.configTabAdd)}
-                onClick={onAdd}
-                aria-label={t('addProfile')}
-                title={t('addProfile')}
+                role="tab"
+                aria-selected={id === activeId}
+                className={cx(
+                  styles.configTab,
+                  id === activeId && styles.isActive,
+                )}
+                onClick={() => onSelect(id)}
+                title={name || (id === activeId ? t('selected') : undefined)}
               >
-                +
+                {name || index + 1}
               </button>
-            </div>
+            ))}
+            <button
+              type="button"
+              className={cx(styles.configTab, styles.configTabAdd)}
+              onClick={onAdd}
+              aria-label={t('addProfile')}
+              title={t('addProfile')}
+            >
+              +
+            </button>
           </div>
         </div>
 
