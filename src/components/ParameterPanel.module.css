@@ -3,6 +3,13 @@
   top: 118px;
   padding: 22px;
 }
+.panel select {
+  appearance: none;
+  padding-right: 34px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='m3 4.5 3 3 3-3' stroke='%2345514c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
 .textButton {
   flex-shrink: 0;
   padding: 5px 0;
@@ -35,11 +42,24 @@
   display: grid;
   gap: 12px;
 }
+.endDateHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+.endDateLabel {
+  white-space: nowrap;
+}
+.endDateHeading .endsAt {
+  margin: 0 0 0 auto;
+  text-align: right;
+}
 .fieldGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin: 17px 0 12px;
+  margin: 17px 0 4px;
 }
 /* Labels share the top line, inputs share the bottom line, even when one
    label wraps. */
@@ -61,6 +81,10 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+.timePanel .finalDayTime {
+  color: #ffb4ab;
+  font-weight: 900;
+}
 .timePanel strong {
   font-size: 1.02rem;
   font-variant-numeric: tabular-nums;
@@ -68,6 +92,9 @@
 .timePanel small {
   color: #b8cbc4;
   font-size: 0.65rem;
+}
+.timePanel > small {
+  font-style: italic;
 }
 .finalHoursPanel {
   margin-top: 16px;
@@ -97,17 +124,18 @@
   line-height: 1.5;
 }
 .statRow {
-  margin-top: 15px;
-  padding: 12px 0;
+  margin: 0 0 20px;
+  padding: 0 0 10px;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  font-size: 0.72rem;
+  font-size: 0.64rem;
+  font-style: italic;
 }
 .statRow strong {
+  margin-right: 12px;
   color: var(--primary);
-  font-size: 0.88rem;
+  font-size: inherit;
 }
 
 .ruleBlock {

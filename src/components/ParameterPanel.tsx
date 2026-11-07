@@ -68,19 +68,25 @@ export function ParameterPanel({
 
       <div className={styles.fieldStack}>
         <label className={shared.field} {...hint.bind('endDate')}>
-          <span>
-            {t('endDate')}
-            <GuideBadge field="endDate" />
+          <span className={styles.endDateHeading}>
+            <span className={styles.endDateLabel}>
+              {t('endDate')}
+              <GuideBadge field="endDate" />
+            </span>
+            <small className={styles.endsAt}>{t('endsAt')}</small>
           </span>
           <input
             type="date"
             value={config.endDate}
             onChange={(event) => onChange({ endDate: event.target.value })}
           />
-          <small>{t('endsAt')}</small>
         </label>
         <div className={styles.timePanel}>
-          <span>{t('timeUntilFinalDay20')}</span>
+          <span>
+            {t('timeUntilFinalDay20').split('{time}')[0]}
+            <span className={styles.finalDayTime}>{t('finalDay20')}</span>
+            {t('timeUntilFinalDay20').split('{time}')[1]}
+          </span>
           <strong>
             {format(remainingHours)} <small>{t('hours')}</small>{' '}
             {format(remainingMinutes)} <small>{t('minutes')}</small>{' '}
@@ -88,6 +94,7 @@ export function ParameterPanel({
               ({format(result.daysRemaining)} {t('days')})
             </small>
           </strong>
+          <small>{t('finalHoursSafetyNote')}</small>
         </div>
       </div>
 
@@ -118,6 +125,11 @@ export function ParameterPanel({
         </label>
       </div>
 
+      <div className={styles.statRow}>
+        <span>{t('extraBottlesAtMax')}</span>
+        <strong>{format(result.extraMaxBottles)}</strong>
+      </div>
+
       <label className={shared.field} {...hint.bind('recoveryRate')}>
         <span>
           {t('hpRecoveryRate')}
@@ -136,11 +148,6 @@ export function ParameterPanel({
           ))}
         </select>
       </label>
-
-      <div className={styles.statRow}>
-        <span>{t('extraBottlesAtMax')}</span>
-        <strong>{format(result.extraMaxBottles)}</strong>
-      </div>
 
       <div className={styles.ruleBlock}>
         <p className={styles.miniHeading}>{t('otherRules')}</p>
