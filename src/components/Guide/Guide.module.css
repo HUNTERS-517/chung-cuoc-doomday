@@ -261,6 +261,20 @@
   overflow: hidden;
   border-radius: 6px;
 }
+.packageCaption {
+  color: #b42323;
+}
+.packageRegion {
+  border-color: #e9a1a1;
+  color: #b42323;
+  background: #fff0f0;
+  box-shadow: inset 3px 0 #c53b3b;
+}
+.packageCaption .badge {
+  border-color: #f0b4b4;
+  color: #b42323;
+  background: #fff0f0;
+}
 .focusPopover .crop {
   max-width: 100%;
   min-height: 0;

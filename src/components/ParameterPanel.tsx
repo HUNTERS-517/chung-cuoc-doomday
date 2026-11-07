@@ -89,28 +89,6 @@ export function ParameterPanel({
             </small>
           </strong>
         </div>
-        <div className={styles.finalHoursPanel}>
-          <span className={styles.finalHoursTitle}>
-            {t('finalWindowTitle')}
-          </span>
-          <span>
-            {format(finalWindowHours)} {t('hours')}{' '}
-            {format(finalWindowMinutePart)} {t('minutes')} {t('finalTimeLeft')}
-          </span>
-          <strong>
-            {format(finalWindowHp)} HP ≈{' '}
-            {format(
-              finalWindowHp === null ? null : finalWindowHp / HP_PER_BOTTLE,
-            )}{' '}
-            {t('bottles')}
-          </strong>
-          <small>
-            ({format(finalWindowHours)} {t('hours')} × {MINUTES_PER_HOUR}{' '}
-            {t('minutesShort')} + {format(finalWindowMinutePart)}{' '}
-            {t('minutesShort')}) × {format(config.recoveryRate)} HP/
-            {t('minutesShort')}
-          </small>
-        </div>
       </div>
 
       <div className={styles.fieldGrid}>
@@ -167,7 +145,15 @@ export function ParameterPanel({
       <div className={styles.ruleBlock}>
         <p className={styles.miniHeading}>{t('otherRules')}</p>
         <p className={styles.ruleCallout}>{t('bottleRate')}</p>
-        <label className={styles.checkRow} {...hint.bind('buyPackage249')}>
+        <div className={styles.ruleNotes}>
+          <span>{t('dailyHint')}</span>
+          <span>{t('packageHint')}</span>
+          <span>200 × 3 × 500 = {format(200 * 3 * HP_PER_BOTTLE)} HP</span>
+        </div>
+        <label
+          className={cx(styles.checkRow, styles.packageOption)}
+          {...hint.bind('buyPackage249')}
+        >
           <input
             type="checkbox"
             checked={config.buyPackage249}
@@ -175,7 +161,7 @@ export function ParameterPanel({
               onChange({ buyPackage249: event.target.checked })
             }
           />
-          <span>
+          <span className={styles.packageLabel}>
             {t('package249')}
             <GuideBadge field="buyPackage249" />
           </span>
@@ -193,10 +179,27 @@ export function ParameterPanel({
             <GuideBadge field="buyDailyDiamonds" />
           </span>
         </label>
-        <div className={styles.ruleNotes}>
-          <span>{t('dailyHint')}</span>
-          <span>{t('packageHint')}</span>
-        </div>
+      </div>
+
+      <div className={styles.finalHoursPanel}>
+        <span className={styles.finalHoursTitle}>{t('finalWindowTitle')}</span>
+        <span>
+          {format(finalWindowHours)} {t('hours')}{' '}
+          {format(finalWindowMinutePart)} {t('minutes')} {t('finalTimeLeft')}
+        </span>
+        <strong>
+          {format(finalWindowHp)} HP ≈{' '}
+          {format(
+            finalWindowHp === null ? null : finalWindowHp / HP_PER_BOTTLE,
+          )}{' '}
+          {t('bottles')}
+        </strong>
+        <small>
+          ({format(finalWindowHours)} {t('hours')} × {MINUTES_PER_HOUR}{' '}
+          {t('minutesShort')} + {format(finalWindowMinutePart)}{' '}
+          {t('minutesShort')}) × {format(config.recoveryRate)} HP/
+          {t('minutesShort')}
+        </small>
       </div>
       {hint.popover}
     </aside>

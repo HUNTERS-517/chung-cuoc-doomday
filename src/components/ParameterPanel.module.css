@@ -70,6 +70,7 @@
   font-size: 0.65rem;
 }
 .finalHoursPanel {
+  margin-top: 16px;
   padding: 13px 14px;
   display: grid;
   gap: 6px;
@@ -144,8 +145,43 @@
   margin: 0;
   accent-color: var(--primary);
 }
+.packageOption {
+  padding: 12px;
+  align-items: center;
+  border: 1px solid #e9a1a1;
+  border-left: 4px solid #c53b3b;
+  border-radius: 10px;
+  background: #fff0f0;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s;
+}
+.packageOption:hover {
+  background: #ffe4e4;
+}
+.packageOption:focus-within {
+  outline: 2px solid #b42323;
+  outline-offset: 3px;
+}
+.packageOption:has(input:checked) {
+  background: #ffe4e4;
+  box-shadow: 0 2px 8px rgba(180, 35, 35, 0.1);
+}
+.packageOption input {
+  flex-shrink: 0;
+  accent-color: #b42323;
+}
+.packageLabel {
+  color: #b42323;
+  font-weight: 800;
+}
+.packageLabel > span {
+  border-color: #f0b4b4;
+  color: #b42323;
+  background: #fff0f0;
+}
 .ruleNotes {
-  margin-top: 15px;
+  margin: 0 0 15px;
   padding-left: 11px;
   display: grid;
   gap: 5px;

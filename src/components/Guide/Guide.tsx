@@ -91,8 +91,19 @@ export function GuideButton({
                     </p>
                   ),
                   ...panel.fields.map((field) => (
-                    <figure key={field} className={styles.card}>
-                      <figcaption className={styles.cardCaption}>
+                    <figure
+                      key={field}
+                      className={cx(
+                        styles.card,
+                        field === 'buyPackage249' && styles.packageRegion,
+                      )}
+                    >
+                      <figcaption
+                        className={cx(
+                          styles.cardCaption,
+                          field === 'buyPackage249' && styles.packageCaption,
+                        )}
+                      >
                         <span className={styles.badge}>
                           {GUIDE_REGIONS[field].code}
                         </span>
@@ -139,7 +150,13 @@ export function GuideButton({
                       )}
                     >
                       {panel.fields.map((f) => (
-                        <span key={f} className={styles.cardCaption}>
+                        <span
+                          key={f}
+                          className={cx(
+                            styles.cardCaption,
+                            f === 'buyPackage249' && styles.packageCaption,
+                          )}
+                        >
                           <span className={styles.badge}>
                             {GUIDE_REGIONS[f].code}
                           </span>
@@ -343,8 +360,20 @@ export function useGuideFocusHint() {
   if (active) {
     const r = GUIDE_REGIONS[active.field];
     popover = createPortal(
-      <span ref={popoverRef} className={styles.focusPopover} role="tooltip">
-        <span className={styles.focusCaption}>
+      <span
+        ref={popoverRef}
+        className={cx(
+          styles.focusPopover,
+          active.field === 'buyPackage249' && styles.packageRegion,
+        )}
+        role="tooltip"
+      >
+        <span
+          className={cx(
+            styles.focusCaption,
+            active.field === 'buyPackage249' && styles.packageCaption,
+          )}
+        >
           <span className={styles.badge}>{r.code}</span>
           {t(r.labelKey)}
         </span>
