@@ -97,8 +97,10 @@ export function EventEstimation() {
               )}
             />
           </span>
-          <strong>{format(result.projectedCurrent.value)}</strong>
-          <small>HP</small>
+          <div className={styles.projectionValue}>
+            <strong>{format(result.projectedCurrent.value)}</strong>
+            <small>HP</small>
+          </div>
         </div>
         <div className={styles.projection} data-tip-row>
           <span>
@@ -109,8 +111,10 @@ export function EventEstimation() {
               )}
             />
           </span>
-          <strong>{format(result.projectedMax.value)}</strong>
-          <small>HP</small>
+          <div className={styles.projectionValue}>
+            <strong>{format(result.projectedMax.value)}</strong>
+            <small>HP</small>
+          </div>
         </div>
       </div>
       <ScenarioComparison />

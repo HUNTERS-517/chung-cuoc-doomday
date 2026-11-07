@@ -100,8 +100,14 @@
   font-variant-numeric: tabular-nums;
 }
 
+.projectionValue {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
 .projection small {
-  margin-top: 8px;
+  flex-shrink: 0;
   opacity: 0.55;
   font-weight: 800;
 }
