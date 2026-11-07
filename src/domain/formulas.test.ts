@@ -57,6 +57,15 @@ describe('calculation formulas', () => {
     );
   });
 
+  it('explains reset HP using the remaining count after 22:00', () => {
+    const result = calculate(config, new Date(2026, 9, 16, 22));
+    expect(result.resetHp.value).toBe(1000);
+    expect(result.resetHp.formatFormula(plain)).toBe(
+      '1 days × 1000 HP/days = 1000 HP',
+    );
+    expect(result.totalBottles.value).toBe(1450);
+  });
+
   it('uses whole minutes for recovery while preserving rounded discharge hours', () => {
     const result = calculate(config, new Date(2026, 9, 16, 16, 30, 30));
     expect(result.minutesRemaining).toBe(3089);

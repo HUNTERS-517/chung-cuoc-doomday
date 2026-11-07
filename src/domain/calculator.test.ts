@@ -56,6 +56,62 @@ describe('calculate', () => {
     },
   );
 
+  it.each([
+    [16, 21, 59, 59, 2, 2],
+    [16, 22, 0, 0, 2, 1],
+    [16, 23, 59, 59, 2, 1],
+    [17, 0, 0, 0, 1, 1],
+    [17, 22, 0, 0, 1, 0],
+    [18, 0, 0, 0, 0, 0],
+    [18, 22, 0, 0, 0, 0],
+    [19, 22, 0, 0, 0, 0],
+    [14, 22, 0, 0, 3, 2],
+  ])(
+    'counts remaining resets on day %i at %i:%i:%i without changing bottle days',
+    (day, hour, minute, second, days, resets) => {
+      const config = {
+        ...createTestConfig(),
+        endDate: '2026-10-18',
+        maxHpReset: '1000',
+      };
+      const result = calculate(
+        config,
+        new Date(2026, 9, day, hour, minute, second),
+      );
+      expect(result.daysRemaining).toBe(days);
+      expect(result.resetHp.value).toBe(resets * 1000);
+      expect(result.futureDailyBottles).toBe(days * 510);
+      expect(result.futurePackageBottles).toBe(days * 210);
+      expect(
+        result.scenarios.both.current.value! -
+          result.scenarios.noPackage.current.value!,
+      ).toBe(days * 200 * 500);
+      const withoutReset = calculate(
+        { ...config, maxHpReset: '0' },
+        new Date(2026, 9, day, hour, minute, second),
+      );
+      for (const key of ['both', 'noDaily', 'noPackage', 'neither'] as const) {
+        expect(
+          result.scenarios[key].current.value! -
+            withoutReset.scenarios[key].current.value!,
+        ).toBe(resets * 1000);
+        expect(
+          result.scenarios[key].max.value! -
+            withoutReset.scenarios[key].max.value!,
+        ).toBe(resets * 1000);
+      }
+      expect(config.maxHpReset).toBe('1000');
+    },
+  );
+
+  it('keeps reset HP unknown for an invalid end date after 22:00', () => {
+    const result = calculate(
+      { ...createTestConfig(), endDate: '' },
+      new Date(2026, 9, 16, 22),
+    );
+    expect(result.resetHp.value).toBeNull();
+  });
+
   it('keeps future bottle sources calculable when current bottles are missing', () => {
     const result = calculate(
       { ...createTestConfig(), currentBottles: '' },

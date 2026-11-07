@@ -50,7 +50,13 @@ export function calculate(
     config.recoveryRate,
   );
   const recoveryHp = calculateRecoveryHp(minutesRemaining, config.recoveryRate);
-  const resetHp = calculateResetHp(daysRemaining, resetPerDay);
+  // The current day's reset is already included in the HP snapshot from 22:00.
+  // Keep calendar days unchanged for future bottle sources and countdowns.
+  const resetsRemaining =
+    daysRemaining === null
+      ? null
+      : Math.max(0, daysRemaining - (now.getHours() >= 22 ? 1 : 0));
+  const resetHp = calculateResetHp(resetsRemaining, resetPerDay);
 
   const {
     dailyBottles,
