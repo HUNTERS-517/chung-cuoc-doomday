@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { calculateEventTimeRemaining, resolveEventEndTime } from './eventTime';
+import {
+  calculateEventTimeRemaining,
+  calculateFinalWindowMinutes,
+  resolveEventEndTime,
+} from './eventTime';
 
 describe('event time', () => {
   it('ends at 20:00 local time on the configured date', () => {
@@ -69,5 +73,27 @@ describe('event time', () => {
       minutesRemaining: 56 * 60,
       hoursRemaining: 56,
     });
+  });
+});
+
+describe('final 20:00–22:00 window', () => {
+  it.each([
+    [17, 21, 0, 120],
+    [18, 19, 59, 120],
+    [18, 20, 0, 120],
+    [18, 20, 35, 85],
+    [18, 21, 59, 1],
+    [18, 22, 0, 0],
+    [19, 8, 0, 0],
+  ])('on day %i at %i:%i leaves %i minutes', (day, hour, minute, expected) => {
+    expect(
+      calculateFinalWindowMinutes(
+        '2026-10-18',
+        new Date(2026, 9, day, hour, minute),
+      ),
+    ).toBe(expected);
+  });
+  it('returns unknown for an invalid end date', () => {
+    expect(calculateFinalWindowMinutes('', new Date())).toBeNull();
   });
 });

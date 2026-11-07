@@ -38,3 +38,20 @@ export function calculateEventTimeRemaining(endDate: string, now: Date) {
     hoursRemaining: Math.max(0, Math.round(remainingMs / 3_600_000)),
   };
 }
+
+/** Only the final-day 20:00–22:00 window contributes to this countdown. */
+export function calculateFinalWindowMinutes(
+  endDate: string,
+  now: Date,
+): number | null {
+  const start = resolveEventEndTime(endDate);
+  if (start === null) return null;
+  const end = new Date(start);
+  end.setHours(22, 0, 0, 0);
+  return Math.max(
+    0,
+    Math.floor(
+      (end.getTime() - Math.max(now.getTime(), start.getTime())) / 60_000,
+    ),
+  );
+}

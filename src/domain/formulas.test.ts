@@ -31,7 +31,7 @@ describe('calculation formulas', () => {
     const result = calculate(config, now);
     expect(result.recoveryHp.value).toBe(998400);
     expect(result.recoveryHp.formatFormula(plain)).toBe(
-      '52 hours × 60 minutes/hours × 320 HP/minutes = 998400 HP',
+      '(52 hours × 60 minutes/hours + 0 minutes) × 320 HP/minutes = 998400 HP',
     );
     expect(result.resetHp.formatFormula(plain)).toBe(
       '2 days × 1000 HP/days = 2000 HP',
@@ -55,6 +55,27 @@ describe('calculation formulas', () => {
     expect(result.extraMaxHp.formatFormula(plain)).toBe(
       '+46500 HP (93 batteries)',
     );
+  });
+
+  it('uses whole minutes for recovery while preserving rounded discharge hours', () => {
+    const result = calculate(config, new Date(2026, 9, 16, 16, 30, 30));
+    expect(result.minutesRemaining).toBe(3089);
+    expect(result.recoveryHp.value).toBe(3089 * 320);
+    expect(result.recoveryHp.formatFormula(plain)).toBe(
+      '(51 hours × 60 minutes/hours + 29 minutes) × 320 HP/minutes = 988480 HP',
+    );
+    expect(result.dischargeHours.value).toBe(51);
+    expect(result.projectedCurrent.value).toBe(1716080);
+  });
+
+  it('updates final-window HP and its formula after 20:00', () => {
+    const result = calculate(config, new Date(2026, 9, 18, 20, 35));
+    expect(result.finalWindowMinutes).toBe(85);
+    expect(result.finalWindowRecoveryHp.value).toBe(27200);
+    expect(result.finalWindowRecoveryHp.formatFormula(plain)).toBe(
+      '(1 hours × 60 minutes/hours + 25 minutes) × 320 HP/minutes = 27200 HP',
+    );
+    expect(result.recoveryHp.value).toBe(0);
   });
 
   it.each([
@@ -162,7 +183,7 @@ describe('calculation formulas', () => {
     const missingTime = calculate({ ...config, endDate: '' }, now);
     expect(missingTime.recoveryHp.value).toBeNull();
     expect(missingTime.recoveryHp.formatFormula(plain)).toBe(
-      '— hours × 60 minutes/hours × 320 HP/minutes = — HP',
+      '(— hours × 60 minutes/hours + — minutes) × 320 HP/minutes = — HP',
     );
     const missingReserve = calculate({ ...config, recoveryLimit: '' }, now);
     expect(missingReserve.hoursToFill.value).toBeNull();

@@ -81,7 +81,7 @@ src/
 - Chênh lệch bình khi current level bằng hoặc nhỏ hơn max level.
 - Sự kiện chưa kết thúc, đúng thời điểm kết thúc và đã kết thúc theo múi giờ cục bộ của trình duyệt.
 - Số phút còn lại được làm tròn xuống; số ngày còn lại theo chênh lệch ngày lịch cục bộ.
-- Số giờ còn lại dùng `ROUND` như công thức Excel; HP hồi dùng số giờ đang hiển thị × 60 × mức hồi HP/phút và không bị giới hạn bởi HP recovery limit.
+- Thời gian hiển thị dưới dạng `X giờ Y phút` từ số phút còn lại; HP hồi dùng `(X × 60 + Y) × mức hồi HP/phút`. Thời gian cần xả vẫn dùng số giờ `ROUND` như công thức Excel. HP hồi và không bị giới hạn bởi HP recovery limit.
 - Số bình hiện tại đã gồm mọi nguồn quá khứ; tổng projection không cộng lại lookup level hiện tại hoặc phần package/KC đã nhận.
 - Tổng dự kiến đến cuối event ở level hiện tại, tổng dự kiến khi bang max và tổng không nạp gói 249.
 - Hai lựa chọn mua hàng tác động độc lập đến công thức. Tắt mua bình bằng kim cương vẫn luôn giữ `60` bình quảng cáo mỗi ngày.

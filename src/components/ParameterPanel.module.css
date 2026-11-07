@@ -69,6 +69,32 @@
   color: #b8cbc4;
   font-size: 0.65rem;
 }
+.finalHoursPanel {
+  padding: 13px 14px;
+  display: grid;
+  gap: 6px;
+  border-radius: 11px;
+  color: var(--primary-dark);
+  background: var(--accent);
+}
+.finalHoursPanel > span {
+  color: #476654;
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+.finalHoursPanel .finalHoursTitle {
+  margin-bottom: 2px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.finalHoursPanel strong {
+  font-size: 1.02rem;
+  font-variant-numeric: tabular-nums;
+}
+.finalHoursPanel small {
+  font-size: 0.65rem;
+  line-height: 1.5;
+}
 .statRow {
   margin-top: 15px;
   padding: 12px 0;

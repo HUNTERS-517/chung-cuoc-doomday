@@ -11,7 +11,10 @@ import type {
   TargetGap,
 } from './types';
 import { parseNumericDraft } from './validation';
-import { calculateEventTimeRemaining } from './calculations/eventTime';
+import {
+  calculateEventTimeRemaining,
+  calculateFinalWindowMinutes,
+} from './calculations/eventTime';
 import {
   calculateRecoveryHp,
   calculateResetHp,
@@ -41,7 +44,12 @@ export function calculate(
   const guildLevel = parseNumericDraft(config.guildLevel);
   const { daysRemaining, minutesRemaining, hoursRemaining } =
     calculateEventTimeRemaining(config.endDate, now);
-  const recoveryHp = calculateRecoveryHp(hoursRemaining, config.recoveryRate);
+  const finalWindowMinutes = calculateFinalWindowMinutes(config.endDate, now);
+  const finalWindowRecoveryHp = calculateRecoveryHp(
+    finalWindowMinutes,
+    config.recoveryRate,
+  );
+  const recoveryHp = calculateRecoveryHp(minutesRemaining, config.recoveryRate);
   const resetHp = calculateResetHp(daysRemaining, resetPerDay);
 
   const {
@@ -108,6 +116,8 @@ export function calculate(
   });
 
   return {
+    finalWindowMinutes,
+    finalWindowRecoveryHp,
     daysRemaining,
     minutesRemaining,
     hoursRemaining,

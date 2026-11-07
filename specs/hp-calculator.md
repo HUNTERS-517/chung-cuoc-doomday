@@ -65,7 +65,7 @@ Chi tiết hành vi đã xác nhận:
 - Level bang tối đa: dropdown chỉ có hai option `27` và `40`.
 - Có bảng lookup ánh xạ level bang sang tổng số bình tích lũy tại level đó; xem bảng bên dưới.
 - Quy đổi bình sang HP: `1 bình = 500 HP`.
-- Sự kiện kết thúc lúc `20:00` của ngày kết thúc theo múi giờ cục bộ của thiết bị/trình duyệt. Ngày kết thúc được chỉnh bằng date picker và lưu theo config.
+- Sự kiện kết thúc thực tế lúc `22:00`; mốc dùng để tính projection là `20:00` của ngày kết thúc theo múi giờ cục bộ của thiết bị/trình duyệt. Ngày kết thúc được chỉnh bằng date picker và lưu theo config.
 - Level bang hiện tại là số nguyên không âm và không được lớn hơn level bang tối đa. Khi blur, trim khoảng trắng, làm tròn xuống và clamp vào khoảng từ `0` đến level tối đa. Khi đổi level tối đa xuống thấp hơn level hiện tại, tự clamp level hiện tại về level tối đa mới.
 
 ### Lookup bình theo level bang
@@ -157,12 +157,12 @@ UI cần có icon thông tin/popover cạnh `Số bình hiện tại`, `Tổng b
 ## Công thức đã xác nhận
 
 - `HP từ bình = số bình × 500`.
-- `Thời điểm kết thúc = 20:00 của ngày kết thúc sự kiện` theo múi giờ cục bộ của thiết bị/trình duyệt.
+- `Thời điểm kết thúc thực tế = 22:00; mốc kết thúc dùng để tính = 20:00 của ngày kết thúc sự kiện` theo múi giờ cục bộ của thiết bị/trình duyệt.
 - `Thời điểm bắt đầu tính = 00:00 của (ngày kết thúc − 2 ngày)` theo múi giờ cục bộ. Event chạy trong cửa sổ cố định `3 ngày` gồm hai ngày trước ngày kết thúc và ngày kết thúc — ví dụ chọn ngày kết thúc `30` thì cửa sổ là các ngày `28–30`; cửa sổ này trùng với thời lượng cố định `3 ngày` của nhóm gói 249. Mọi thời gian trước thời điểm bắt đầu tính không được cộng vào kết quả.
 - `Số ngày còn lại = MIN(3, MAX(0, ngày kết thúc − ngày hôm nay))`, tương đương công thức Excel `=MIN(3, MAX(0, H4 - TODAY()))`. `Ngày hôm nay` và ngày kết thúc đều được hiểu theo múi giờ cục bộ của thiết bị/trình duyệt. Đây là chênh lệch ngày lịch, không suy ra từ số giờ còn lại; mỗi ngày còn lại vẫn cộng trọn Daily, HP reset và gói 249, còn ngày kết thúc không cộng thêm các nguồn theo ngày này. Khi event chưa bắt đầu (trước thời điểm bắt đầu tính), số ngày còn lại luôn bằng `3`.
 - `Số phút còn lại = MAX(0, ROUNDDOWN((thời điểm kết thúc − MAX(thời điểm hiện tại, thời điểm bắt đầu tính)) quy đổi sang phút, 0))`. Khi event chưa bắt đầu, số phút còn lại luôn bằng `4080` (tức `68` giờ).
 - `Số giờ còn lại = MAX(0, ROUND((thời điểm kết thúc − MAX(thời điểm hiện tại, thời điểm bắt đầu tính)) × 24, 0))`, tương đương công thức Excel `=MAX(0, ROUND((H4 + TIME(20, 0, 0) - MAX(NOW(), H4 - 2)) * 24, 0))` với `H4` là ngày kết thúc.
-- `HP hồi đến ngày kết thúc = số giờ còn lại × 60 × mức hồi HP mỗi phút`. Số giờ dùng trong công thức là số giờ nguyên đang hiển thị trên giao diện. HP hồi không bị khống chế bởi giới hạn dự trữ.
+- `HP hồi đến mốc 20h ngày cuối = (X × 60 + Y) × mức hồi HP mỗi phút`. Giao diện hiển thị `X giờ Y phút`, với `X = FLOOR(số phút còn lại / 60)` và `Y = số phút còn lại % 60`. Số giờ làm tròn ở công thức trên tiếp tục được dùng riêng cho thời gian cần xả. HP hồi không bị khống chế bởi giới hạn dự trữ.
 - `HP reset = số ngày còn lại × Max HP reset / day`.
 - `Số bình Daily / ngày = 60 + (mua bình bằng kim cương ? 90 × 5 : 0)`.
 - Khi checkbox mua bình bằng kim cương được chọn, `Số bình Daily / ngày = 510`.

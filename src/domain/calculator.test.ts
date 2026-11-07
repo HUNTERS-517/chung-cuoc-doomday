@@ -89,10 +89,11 @@ describe('calculate', () => {
     );
   });
 
-  it('calculates recovered HP from the displayed whole hours', () => {
+  it('calculates recovered HP from whole minutes', () => {
     const result = calculate(createTestConfig(), new Date(2026, 9, 16, 16, 30));
     expect(result.hoursRemaining).toBe(52);
-    expect(result.recoveryHp.value).toBe(52 * 60 * 320);
+    expect(result.minutesRemaining).toBe(51 * 60 + 30);
+    expect(result.recoveryHp.value).toBe((51 * 60 + 30) * 320);
   });
 
   it('returns zero future resources once the event ends', () => {

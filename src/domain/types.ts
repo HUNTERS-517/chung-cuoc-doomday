@@ -42,6 +42,8 @@ export interface TargetGap {
 }
 
 export interface CalculatorResult {
+  finalWindowMinutes: number | null;
+  finalWindowRecoveryHp: ResultWithFormula;
   daysRemaining: number | null;
   minutesRemaining: number | null;
   hoursRemaining: number | null;

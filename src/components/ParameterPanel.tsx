@@ -1,3 +1,5 @@
+import { HP_PER_BOTTLE } from '../domain/calculations/bottleResources';
+import { MINUTES_PER_HOUR } from '../domain/resultWithFormula';
 import { RECOVERY_RATE_OPTIONS } from '../domain/defaultFormValue';
 import type { CalculatorConfig } from '../domain/types';
 import { useCalculator } from '../context/CalculatorContext';
@@ -25,6 +27,23 @@ export function ParameterPanel({
   const t = useTranslation();
   const format = useFormat();
   const hint = useGuideFocusHint();
+  const finalWindowHours =
+    result.finalWindowMinutes === null
+      ? null
+      : Math.floor(result.finalWindowMinutes / MINUTES_PER_HOUR);
+  const finalWindowMinutePart =
+    result.finalWindowMinutes === null
+      ? null
+      : result.finalWindowMinutes % MINUTES_PER_HOUR;
+  const finalWindowHp = result.finalWindowRecoveryHp.value;
+  const remainingHours =
+    result.minutesRemaining === null
+      ? null
+      : Math.floor(result.minutesRemaining / MINUTES_PER_HOUR);
+  const remainingMinutes =
+    result.minutesRemaining === null
+      ? null
+      : result.minutesRemaining % MINUTES_PER_HOUR;
   if (collapsed) {
     return (
       <button type="button" className={styles.expandButton} onClick={onToggle}>
@@ -61,13 +80,36 @@ export function ParameterPanel({
           <small>{t('endsAt')}</small>
         </label>
         <div className={styles.timePanel}>
-          <span>{t('timeLeft')}</span>
+          <span>{t('timeUntilFinalDay20')}</span>
           <strong>
-            {format(result.hoursRemaining)} <small>{t('hours')}</small>{' '}
+            {format(remainingHours)} <small>{t('hours')}</small>{' '}
+            {format(remainingMinutes)} <small>{t('minutes')}</small>{' '}
             <small>
               ({format(result.daysRemaining)} {t('days')})
             </small>
           </strong>
+        </div>
+        <div className={styles.finalHoursPanel}>
+          <span className={styles.finalHoursTitle}>
+            {t('finalWindowTitle')}
+          </span>
+          <span>
+            {format(finalWindowHours)} {t('hours')}{' '}
+            {format(finalWindowMinutePart)} {t('minutes')} {t('finalTimeLeft')}
+          </span>
+          <strong>
+            {format(finalWindowHp)} HP ≈{' '}
+            {format(
+              finalWindowHp === null ? null : finalWindowHp / HP_PER_BOTTLE,
+            )}{' '}
+            {t('bottles')}
+          </strong>
+          <small>
+            ({format(finalWindowHours)} {t('hours')} × {MINUTES_PER_HOUR}{' '}
+            {t('minutesShort')} + {format(finalWindowMinutePart)}{' '}
+            {t('minutesShort')}) × {format(config.recoveryRate)} HP/
+            {t('minutesShort')}
+          </small>
         </div>
       </div>
 
