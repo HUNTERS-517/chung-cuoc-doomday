@@ -90,6 +90,8 @@ export interface GuidePanel {
   src: string;
   imageSize: [number, number];
   fields: GuideField[];
+  /** Match left/right captions to the corresponding marks on the image. */
+  legendLayout?: 'split';
   crop?: Rect;
   /** Optional explanatory note shown above the panel. */
   noteKey?: TranslationKey;
@@ -105,16 +107,22 @@ export function panelsFor(fields: GuideField[]): GuidePanel[][] {
     panelFields: GuideField[],
     crop?: Rect,
     noteKey?: TranslationKey,
+    legendLayout?: GuidePanel['legendLayout'],
   ): GuidePanel => {
     const { src, imageSize } = GUIDE_REGIONS[panelFields[0]];
-    return { src, imageSize, fields: panelFields, crop, noteKey };
+    return { src, imageSize, fields: panelFields, crop, noteKey, legendLayout };
   };
   const section = GUIDE_REGIONS[fields[0]].code[0];
   const layout = (
     regions.panels as Partial<
       Record<
         string,
-        { fields: string[]; crop?: number[]; noteKey?: string }[][]
+        {
+          fields: string[];
+          crop?: number[];
+          noteKey?: string;
+          legendLayout?: GuidePanel['legendLayout'];
+        }[][]
       >
     >
   )[section];
@@ -125,6 +133,7 @@ export function panelsFor(fields: GuideField[]): GuidePanel[][] {
           p.fields as GuideField[],
           p.crop as Rect,
           p.noteKey as TranslationKey | undefined,
+          p.legendLayout,
         ),
       ),
     );

@@ -131,7 +131,13 @@ export function GuideButton({
                     key={panel.fields[0]}
                     className={cx(styles.card, styles.figure)}
                   >
-                    <figcaption className={styles.figureLegend}>
+                    <figcaption
+                      className={cx(
+                        styles.figureLegend,
+                        panel.legendLayout === 'split' &&
+                          styles.figureLegendSplit,
+                      )}
+                    >
                       {panel.fields.map((f) => (
                         <span key={f} className={styles.cardCaption}>
                           <span className={styles.badge}>

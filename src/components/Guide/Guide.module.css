@@ -158,6 +158,22 @@
   display: grid;
   gap: 4px;
 }
+.figureLegendSplit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.figureLegendSplit .cardCaption {
+  max-width: 100%;
+}
+.figureLegendSplit .badge {
+  flex-shrink: 0;
+}
+.figureLegendSplit .cardCaption:last-child {
+  margin-left: auto;
+  justify-content: flex-end;
+  text-align: right;
+}
 
 .dialogCompact {
   width: min(640px, calc(100vw - 32px));

@@ -7,13 +7,15 @@
           "fields": ["currentMerit"]
         },
         {
-          "fields": ["maxHpReset", "currentHp"],
+          "fields": ["currentHp", "maxHpReset"],
+          "legendLayout": "split",
           "crop": [0, 380, 415, 141]
         }
       ],
       [
         {
           "fields": ["hpBackup", "recoveryLimit"],
+          "legendLayout": "split",
           "crop": [0, 262, 415, 108]
         },
         {
