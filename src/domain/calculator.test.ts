@@ -65,7 +65,11 @@ describe('calculate', () => {
     [18, 0, 0, 0, 0, 0],
     [18, 22, 0, 0, 0, 0],
     [19, 22, 0, 0, 0, 0],
-    [14, 22, 0, 0, 3, 2],
+    [14, 22, 0, 0, 3, 3],
+    [15, 21, 59, 59, 3, 3],
+    [15, 22, 0, 0, 3, 3],
+    [15, 23, 59, 59, 3, 3],
+    [16, 0, 0, 0, 2, 2],
   ])(
     'counts remaining resets on day %i at %i:%i:%i without changing bottle days',
     (day, hour, minute, second, days, resets) => {

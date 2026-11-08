@@ -39,6 +39,19 @@ export function calculateEventTimeRemaining(endDate: string, now: Date) {
   };
 }
 
+/** Only resets within the selected 3-day round can have happened at 22:00. */
+export function calculateResetDaysRemaining(endDate: string, now: Date) {
+  const { daysRemaining } = calculateEventTimeRemaining(endDate, now);
+  if (daysRemaining === null) return null;
+  // Inside the round, the calendar difference is 0–2; before it, it is capped at 3.
+  // After the round daysRemaining is zero, so no adjustment is needed.
+  const resetAlreadyReceived =
+    daysRemaining > 0 &&
+    daysRemaining < EVENT_WINDOW_DAYS &&
+    now.getHours() >= 22;
+  return Math.max(0, daysRemaining - (resetAlreadyReceived ? 1 : 0));
+}
+
 /** Only the final-day 20:00–22:00 window contributes to this countdown. */
 export function calculateFinalWindowMinutes(
   endDate: string,
