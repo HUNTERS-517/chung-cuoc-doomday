@@ -53,6 +53,36 @@ export function useCalculatorProfiles() {
     setActiveId(clone.id);
   };
 
+  const deleteProfile = (id: string) => {
+    if (profiles.length <= 1 || !profiles.some((profile) => profile.id === id))
+      return;
+    const remaining = profiles.filter((profile) => profile.id !== id);
+    const deletedIndex = profiles.findIndex((profile) => profile.id === id);
+    const nextActiveId =
+      id === activeId
+        ? remaining[Math.min(deletedIndex, remaining.length - 1)].id
+        : activeId;
+    const nextSavedProfiles = savedProfiles.filter(
+      (profile) => profile.id !== id,
+    );
+    // Keep a stored profile if the remaining profiles are all new drafts.
+    if (nextSavedProfiles.length === 0) {
+      const nextProfile = remaining.find(
+        (profile) => profile.id === nextActiveId,
+      )!;
+      nextSavedProfiles.push(nextProfile);
+    }
+    try {
+      saveProfiles(nextSavedProfiles, nextActiveId);
+      setProfiles(remaining);
+      setSavedProfiles(nextSavedProfiles);
+      setActiveId(nextActiveId);
+      setFailedConfig(null);
+    } catch {
+      setFailedConfig(activeConfig);
+    }
+  };
+
   const renameProfile = (id: string, name: string) => {
     const trimmedName = name.trim();
     if (!trimmedName) return;
@@ -72,6 +102,7 @@ export function useCalculatorProfiles() {
     saveCurrentProfile,
     addProfile,
     renameProfile,
+    deleteProfile,
     selectProfile: setActiveId,
   };
 }

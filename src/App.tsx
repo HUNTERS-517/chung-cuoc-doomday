@@ -10,15 +10,10 @@ import { useNow } from './hooks/useNow';
 import { useTranslation } from './context/LocaleContext';
 import { CalculatorProvider } from './context/CalculatorContext';
 import { cx } from './shared/cx';
-import shared from './components/shared.module.css';
 import styles from './App.module.css';
 
 export default function App() {
   const [collapsed, setCollapsed] = useState(false);
-  const [renameDraft, setRenameDraft] = useState<{
-    id: string;
-    name: string;
-  } | null>(null);
 
   const {
     profiles,
@@ -30,6 +25,7 @@ export default function App() {
     selectProfile,
     addProfile,
     renameProfile,
+    deleteProfile,
   } = useCalculatorProfiles();
   const {
     handleNumericChange,
@@ -53,12 +49,11 @@ export default function App() {
           profiles={profiles}
           activeId={activeId}
           saveStatus={saveStatus}
-          onRename={() =>
-            setRenameDraft({ id: activeId, name: activeConfig.name })
-          }
+          onRename={renameProfile}
           onSave={saveCurrentProfile}
           onSelect={selectProfile}
           onAdd={addProfile}
+          onDelete={deleteProfile}
         />
         <main className={cx(styles.workspace, collapsed && styles.isCollapsed)}>
           <ParameterPanel
@@ -75,55 +70,6 @@ export default function App() {
             <ResultsDashboard />
           </div>
         </main>
-
-        {renameDraft && (
-          <div
-            className={styles.modalBackdrop}
-            onClick={() => setRenameDraft(null)}
-            onKeyDown={(event) => {
-              if (event.key === 'Escape') setRenameDraft(null);
-            }}
-          >
-            <form
-              className={cx(styles.modal, styles.renameModal)}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="rename-title"
-              onClick={(event) => event.stopPropagation()}
-              onSubmit={(event) => {
-                event.preventDefault();
-                renameProfile(renameDraft.id, renameDraft.name);
-                setRenameDraft(null);
-              }}
-            >
-              <h2 id="rename-title">{t('renameProfile')}</h2>
-              <label className={cx(shared.field, styles.renameField)}>
-                <span>{t('profileName')}</span>
-                <input
-                  autoFocus
-                  required
-                  maxLength={60}
-                  value={renameDraft.name}
-                  onChange={(event) =>
-                    setRenameDraft({ ...renameDraft, name: event.target.value })
-                  }
-                />
-              </label>
-              <div className={styles.modalActions}>
-                <button
-                  type="button"
-                  className={styles.modalCancel}
-                  onClick={() => setRenameDraft(null)}
-                >
-                  {t('cancel')}
-                </button>
-                <button type="submit" disabled={!renameDraft.name.trim()}>
-                  {t('rename')}
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
 
         {showBackupNotice && (
           <div

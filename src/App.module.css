@@ -72,26 +72,6 @@
   font-size: 1.3rem;
   font-weight: 900;
 }
-.renameModal {
-  text-align: left;
-}
-.renameField {
-  margin-top: 20px;
-}
-.modalActions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-.modalActions .modalCancel {
-  color: var(--primary);
-  background: #e9f0e9;
-}
-.modalActions button:disabled {
-  cursor: default;
-  opacity: 0.5;
-}
-
 @media (max-width: 1020px) {
   .workspace {
     grid-template-columns: 270px minmax(0, 1fr);

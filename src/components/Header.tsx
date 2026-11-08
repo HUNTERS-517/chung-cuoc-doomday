@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { CalculatorConfig, Locale } from '../domain/types';
 import { useI18n } from '../context/LocaleContext';
 import { cx } from '../shared/cx';
@@ -20,9 +21,10 @@ interface HeaderProps {
   activeId: string;
   saveStatus: 'saved' | 'unsaved' | 'error';
   onSave: () => void;
-  onRename: () => void;
+  onRename: (id: string, name: string) => void;
   onSelect: (id: string) => void;
   onAdd: () => void;
+  onDelete: (id: string) => void;
 }
 
 export function Header({
@@ -33,8 +35,13 @@ export function Header({
   onRename,
   onSelect,
   onAdd,
+  onDelete,
 }: HeaderProps) {
   const { locale, changeLocale, t } = useI18n();
+  const [renameDraft, setRenameDraft] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
   const saveLabel = saveStatus === 'error' ? t('saveError') : t(saveStatus);
   return (
     <header className={styles.topbar}>
@@ -56,20 +63,29 @@ export function Header({
             <span className={styles.controlLabel}>{t('profile')}</span>
             <button
               type="button"
-              className={styles.configSave}
-              onClick={onRename}
-              title={t('renameProfile')}
-            >
-              {t('rename')}
-            </button>
-            <button
-              type="button"
-              className={styles.configSave}
+              className={cx(
+                styles.configSave,
+                styles.saveButton,
+                saveStatus !== 'saved' && styles.saveButtonPending,
+              )}
               onClick={onSave}
               title={t('saveProfile')}
               aria-label={t('saveProfile')}
             >
               {t('save')}
+            </button>
+            <button
+              type="button"
+              className={styles.configSave}
+              disabled={renameDraft !== null}
+              onClick={() => {
+                const profile = profiles.find(({ id }) => id === activeId);
+                if (profile)
+                  setRenameDraft({ id: profile.id, name: profile.name });
+              }}
+              title={t('renameProfile')}
+            >
+              {t('rename')}
             </button>
           </div>
           <div
@@ -78,20 +94,105 @@ export function Header({
             aria-label={t('profile')}
           >
             {profiles.map(({ id, name }, index) => (
-              <button
+              <div
                 key={id}
-                type="button"
-                role="tab"
-                aria-selected={id === activeId}
-                className={cx(
-                  styles.configTab,
-                  id === activeId && styles.isActive,
-                )}
-                onClick={() => onSelect(id)}
-                title={name || (id === activeId ? t('selected') : undefined)}
+                className={styles.configTabGroup}
+                role="presentation"
               >
-                {name || index + 1}
-              </button>
+                {renameDraft?.id === id ? (
+                  <span
+                    className={cx(
+                      styles.configTab,
+                      styles.isActive,
+                      styles.configNameEditor,
+                    )}
+                  >
+                    <span
+                      className={styles.configNameMeasure}
+                      aria-hidden="true"
+                    >
+                      {renameDraft.name || ' '}
+                    </span>
+                    <input
+                      className={styles.configNameInput}
+                      aria-label={t('profileName')}
+                      autoFocus
+                      maxLength={60}
+                      value={renameDraft.name}
+                      onFocus={(event) => {
+                        const input = event.currentTarget;
+                        input.setSelectionRange(
+                          input.value.length,
+                          input.value.length,
+                        );
+                      }}
+                      onChange={(event) =>
+                        setRenameDraft({ id, name: event.target.value })
+                      }
+                      onBlur={() => {
+                        onRename(id, renameDraft.name);
+                        setRenameDraft(null);
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.nativeEvent.isComposing) return;
+                        if (event.key === 'Enter') {
+                          event.preventDefault();
+                          event.currentTarget.blur();
+                        } else if (event.key === 'Escape') {
+                          event.preventDefault();
+                          setRenameDraft(null);
+                        }
+                      }}
+                    />
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={id === activeId}
+                    className={cx(
+                      styles.configTab,
+                      id === activeId && styles.isActive,
+                    )}
+                    onClick={() => {
+                      if (id === activeId) {
+                        setRenameDraft({ id, name });
+                      } else {
+                        onSelect(id);
+                      }
+                    }}
+                    title={
+                      name || (id === activeId ? t('selected') : undefined)
+                    }
+                  >
+                    {name || index + 1}
+                  </button>
+                )}
+                {profiles.length > 1 && (
+                  <button
+                    type="button"
+                    className={styles.configDelete}
+                    onClick={() => onDelete(id)}
+                    aria-label={`${t('deleteProfile')}: ${name || index + 1}`}
+                    title={t('deleteProfile')}
+                  >
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="m3 3 6 6m0-6-6 6"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </button>
+                )}
+              </div>
             ))}
             <button
               type="button"

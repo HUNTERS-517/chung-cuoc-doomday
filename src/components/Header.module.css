@@ -108,18 +108,31 @@
   color: var(--accent);
   background: rgba(185, 220, 104, 0.1);
   font-size: 0.7rem;
+  font-weight: 500;
+}
+.saveButton {
   font-weight: 800;
 }
 .configSave:hover {
   background: rgba(185, 220, 104, 0.2);
 }
+.saveButton.saveButtonPending {
+  color: var(--primary-dark);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(185, 220, 104, 0.35);
+}
+.saveButton.saveButtonPending:hover {
+  background: #c9e58a;
+  box-shadow: 0 0 16px rgba(185, 220, 104, 0.5);
+}
 .configTabs {
   display: flex;
-  gap: 6px;
+  gap: 10px;
   min-width: 0;
   max-width: min(36vw, 520px);
-  margin-left: -3px;
-  padding: 3px;
+  margin-left: -6px;
+  padding: 9px 6px 3px;
   overflow-x: auto;
   scrollbar-width: thin;
 }
@@ -147,6 +160,64 @@
   background: var(--accent);
   border-color: var(--accent);
 }
+.configNameEditor {
+  position: relative;
+  display: inline-grid;
+  align-items: center;
+  padding-right: 12px;
+}
+.configNameMeasure {
+  visibility: hidden;
+  white-space: pre;
+}
+.configNameEditor input.configNameInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  padding: 0 10px;
+  border: 0;
+  border-radius: inherit;
+  outline: none;
+  box-shadow: none;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-size: inherit !important;
+  text-align: left;
+  caret-color: currentColor;
+}
+.configTabGroup {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+}
+.configDelete {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  right: -5px;
+  top: -6px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid #64776e;
+  border-radius: 50%;
+  color: #dfe8e4;
+  background: var(--primary-dark);
+}
+.configTabGroup:hover .configDelete,
+.configDelete:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.configDelete:hover {
+  color: #ffd0b8;
+  background: #85402d;
+}
 .configTabAdd {
   color: var(--accent);
   font-size: 1.15rem;
@@ -173,8 +244,15 @@
   background: var(--accent);
   box-shadow: 0 0 0 4px rgba(185, 220, 104, 0.1);
 }
+.saveStatus.unsaved {
+  color: #e9ae83;
+  font-weight: 600;
+}
 .saveStatus.unsaved .saveDot {
-  background: #e9c76b;
+  background: currentColor;
+}
+.saveStatus.error {
+  color: #edaa94;
 }
 .saveStatus.error .saveDot {
   background: var(--orange);

@@ -24,6 +24,13 @@ export const messages = {
     id: 'Duplikat profil',
     zh: '复制配置',
   },
+  deleteProfile: {
+    vi: 'Xóa profile',
+    en: 'Delete profile',
+    th: 'ลบโปรไฟล์',
+    id: 'Hapus profil',
+    zh: '删除配置',
+  },
   rename: {
     vi: 'Đổi tên',
     en: 'Rename',
