@@ -1,0 +1,36 @@
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 17px 0 4px;
+}
+/* Labels share the top line, inputs share the bottom line, even when one
+   label wraps. */
+.fieldGrid > label {
+  grid-template-rows: 1fr auto;
+}
+
+.statBlock {
+  margin: 0 0 20px;
+  padding: 0 0 10px;
+  display: grid;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.64rem;
+  font-style: italic;
+}
+.statRow strong {
+  margin-right: 12px;
+  color: var(--primary);
+  font-size: inherit;
+}
+
+@media (max-width: 390px) {
+  .fieldGrid {
+    grid-template-columns: 1fr;
+  }
+}

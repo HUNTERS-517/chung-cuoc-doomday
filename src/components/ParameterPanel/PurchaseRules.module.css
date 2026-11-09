@@ -1,0 +1,88 @@
+.ruleBlock {
+  margin-top: 20px;
+}
+.miniHeading {
+  margin: 0 0 10px;
+  color: #8b9691;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.ruleCallout {
+  margin: 0 0 13px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  color: var(--primary);
+  background: #e9f0e9;
+  font: 800 0.75rem/1.2 monospace;
+}
+.ruleNotes {
+  margin: 0 0 15px;
+  padding-left: 11px;
+  display: grid;
+  gap: 5px;
+  border-left: 2px solid var(--orange);
+  color: #7e8984;
+  font-size: 0.64rem;
+  line-height: 1.4;
+}
+
+/* Checkbox rows */
+.checkRow {
+  margin: 10px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #35413c;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+/* Indent plain rows to match the package option's border + padding so both
+   checkboxes sit on the same vertical line. */
+.checkRow:not(.packageOption) {
+  padding: 0 13px 0 16px;
+  align-items: center;
+}
+.checkRow input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--primary);
+}
+.packageOption {
+  padding: 12px;
+  align-items: center;
+  border: 1px solid #e9a1a1;
+  border-left: 4px solid #c53b3b;
+  border-radius: 10px;
+  background: #fff0f0;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s;
+}
+.packageOption:hover {
+  background: #ffe4e4;
+}
+.packageOption:focus-within {
+  outline: 2px solid #b42323;
+  outline-offset: 3px;
+}
+.packageOption:has(input:checked) {
+  background: #ffe4e4;
+  box-shadow: 0 2px 8px rgba(180, 35, 35, 0.1);
+}
+.packageOption input {
+  flex-shrink: 0;
+  accent-color: #b42323;
+}
+.packageLabel {
+  color: #b42323;
+  font-weight: 800;
+}
+.packageLabel > span {
+  border-color: #f0b4b4;
+  color: #b42323;
+  background: #fff0f0;
+}

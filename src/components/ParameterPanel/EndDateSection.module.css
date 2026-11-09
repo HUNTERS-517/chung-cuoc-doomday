@@ -1,0 +1,49 @@
+.fieldStack {
+  display: grid;
+  gap: 12px;
+}
+.endDateHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+.endDateLabel {
+  white-space: nowrap;
+}
+.endDateHeading .endsAt {
+  margin: 0 0 0 auto;
+  text-align: right;
+}
+
+/* Countdown to the final day */
+.timePanel {
+  padding: 13px 14px;
+  display: grid;
+  gap: 4px;
+  border-radius: 11px;
+  color: #dce9e3;
+  background: var(--primary);
+}
+.timePanel > span {
+  color: #a8c1b7;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.timePanel .finalDayTime {
+  color: #ffb4ab;
+  font-weight: 900;
+}
+.timePanel strong {
+  font-size: 1.02rem;
+  font-variant-numeric: tabular-nums;
+}
+.timePanel small {
+  color: #b8cbc4;
+  font-size: 0.65rem;
+}
+.timePanel > small {
+  font-style: italic;
+}

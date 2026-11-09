@@ -2,7 +2,7 @@ import type { Locale } from './domain/types';
 import { formulaMessages } from './domain/formulas.i18n';
 import { appMessages } from './App.i18n';
 import { headerMessages } from './components/Header/Header.i18n';
-import { parameterPanelMessages } from './components/ParameterPanel.i18n';
+import { parameterPanelMessages } from './components/ParameterPanel/ParameterPanel.i18n';
 import { accountInputsMessages } from './components/AccountInputs.i18n';
 import { guideMessages } from './components/Guide/Guide.i18n';
 import { cautionMessages } from './components/Guide/CautionButton/CautionButton.i18n';
