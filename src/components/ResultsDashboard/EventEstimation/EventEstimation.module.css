@@ -1,0 +1,27 @@
+.summaryCard {
+  padding: 24px;
+  color: white;
+  background: var(--primary-dark);
+  border-color: transparent;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Decorative ring in the top-right corner */
+.summaryCard::after {
+  content: '';
+  position: absolute;
+  right: -65px;
+  top: -90px;
+  width: 230px;
+  height: 230px;
+  border: 45px solid rgba(185, 220, 104, 0.055);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .summaryCard {
+    padding: 19px 16px;
+  }
+}

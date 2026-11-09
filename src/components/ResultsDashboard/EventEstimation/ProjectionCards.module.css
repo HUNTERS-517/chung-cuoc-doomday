@@ -1,0 +1,67 @@
+.projectionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.projection {
+  min-height: 132px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid var(--accent);
+  border-radius: 15px;
+  color: var(--primary-dark);
+  background: var(--accent);
+}
+
+.projection > span {
+  margin-bottom: 8px;
+  color: #476654;
+  font-size: 0.7rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.projectionValue {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.projection strong {
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+.projection small {
+  flex-shrink: 0;
+  opacity: 0.55;
+  font-weight: 800;
+}
+
+@container results (max-width: 540px) {
+  .projectionGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .projectionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .projection {
+    min-height: 118px;
+  }
+
+  .projection strong {
+    font-size: 2rem;
+  }
+}

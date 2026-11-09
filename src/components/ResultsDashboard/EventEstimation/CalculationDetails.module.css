@@ -1,0 +1,38 @@
+.calculationDetails {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.detailList {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-bottom: 4px;
+}
+
+.detailList > div {
+  position: relative;
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.73rem;
+}
+
+.detailList > div:last-child {
+  border-bottom: 0;
+}
+
+.detailList span {
+  color: #64706a;
+}
+
+.detailList strong {
+  font-variant-numeric: tabular-nums;
+}

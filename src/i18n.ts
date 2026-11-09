@@ -6,7 +6,7 @@ import { parameterPanelMessages } from './components/ParameterPanel/ParameterPan
 import { accountInputsMessages } from './components/AccountInputs.i18n';
 import { guideMessages } from './components/Guide/Guide.i18n';
 import { cautionMessages } from './components/Guide/CautionButton/CautionButton.i18n';
-import { eventEstimationMessages } from './components/ResultsDashboard/EventEstimation.i18n';
+import { eventEstimationMessages } from './components/ResultsDashboard/EventEstimation/EventEstimation.i18n';
 import { scenarioComparisonMessages } from './components/ResultsDashboard/ScenarioComparison.i18n';
 import { targetProgressMessages } from './components/ResultsDashboard/TargetProgress.i18n';
 

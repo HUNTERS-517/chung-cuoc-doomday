@@ -1,4 +1,4 @@
-import { EventEstimation } from './EventEstimation';
+import { EventEstimation } from './EventEstimation/EventEstimation';
 import { TargetProgress } from './TargetProgress';
 import styles from './ResultsDashboard.module.css';
 
