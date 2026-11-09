@@ -1,0 +1,29 @@
+/* Columns size independently so cards stagger instead of row-aligning. */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.column {
+  display: grid;
+  gap: 12px;
+}
+.panelNote {
+  margin: 0;
+  padding: 8px 10px;
+  border-left: 3px solid #b8c4bf;
+  border-radius: 6px;
+  background: #eef2f0;
+  color: #4a5651;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  /* Translations use "\n" for one short point per line. */
+  white-space: pre-line;
+}
+.fieldNote {
+  margin: 0;
+  justify-self: start;
+  color: #4a5651;
+  font-size: 0.72rem;
+}

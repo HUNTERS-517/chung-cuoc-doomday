@@ -1,0 +1,11 @@
+.crop {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.crop img {
+  position: absolute;
+  max-width: none;
+  height: auto;
+}

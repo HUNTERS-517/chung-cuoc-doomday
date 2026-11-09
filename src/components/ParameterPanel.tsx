@@ -5,8 +5,12 @@ import type { CalculatorConfig } from '../domain/types';
 import { useCalculator } from '../context/CalculatorContext';
 import { useFormat, useTranslation } from '../context/LocaleContext';
 import { cx } from '../shared/cx';
-import { GuideBadge, GuideHeading, useGuideFocusHint } from './Guide/Guide';
-import { PARAMETER_GUIDE_FIELDS } from './Guide/guideData';
+import {
+  GuideBadge,
+  GuideHeading,
+  PARAMETER_GUIDE_FIELDS,
+  useGuideFocusHint,
+} from './Guide';
 import shared from './shared.module.css';
 import styles from './ParameterPanel.module.css';
 
