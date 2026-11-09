@@ -1,0 +1,72 @@
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 240px;
+}
+.brandMark {
+  display: block;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 15px;
+  object-fit: cover;
+}
+.title {
+  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+.devSignature {
+  width: fit-content;
+  margin: 8px 0 0;
+  padding: 5px 9px;
+  border: 1px solid rgba(185, 220, 104, 0.3);
+  border-radius: 8px;
+  color: #dfe8e4;
+  background: rgba(185, 220, 104, 0.09);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  position: relative;
+}
+/* Tiny watermark: dev's in-game ID, read from data-dev-ingame-id */
+.devSignature::after {
+  content: attr(data-dev-ingame-id);
+  position: absolute;
+  left: 100%;
+  bottom: 1px;
+  margin-left: 6px;
+  color: #dfe8e4;
+  font-size: 0.5625rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.3;
+  pointer-events: none;
+  user-select: none;
+}
+.devSignature strong {
+  color: var(--accent);
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .brand {
+    margin-bottom: 15px;
+  }
+  .brandMark {
+    width: 42px;
+    height: 42px;
+  }
+  .devSignature {
+    margin-top: 5px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.6875rem;
+    line-height: 1.4;
+  }
+}

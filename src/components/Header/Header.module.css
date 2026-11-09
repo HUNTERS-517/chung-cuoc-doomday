@@ -1,0 +1,50 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 92px;
+  padding: 17px clamp(18px, 4vw, 58px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  color: white;
+  background: var(--primary-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.topbarControls {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: space-between;
+  gap: 25px;
+  min-width: 0;
+}
+
+@media (max-width: 1020px) {
+  .topbar {
+    align-items: flex-start;
+  }
+  .topbarControls {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    position: relative;
+    padding: 16px;
+    display: block;
+  }
+  .topbarControls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (max-width: 390px) {
+  .topbarControls {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+}

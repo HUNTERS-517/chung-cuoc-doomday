@@ -1,0 +1,128 @@
+.configArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* Action row: label, Save / Rename buttons, save status */
+.configActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+.controlLabel {
+  margin-right: 4px;
+  color: #a9bbb4;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.configSave {
+  flex-shrink: 0;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid rgba(185, 220, 104, 0.5);
+  border-radius: 8px;
+  color: var(--accent);
+  background: rgba(185, 220, 104, 0.1);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.saveButton {
+  font-weight: 800;
+}
+.configSave:hover {
+  background: rgba(185, 220, 104, 0.2);
+}
+.saveButton.saveButtonPending {
+  color: var(--primary-dark);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(185, 220, 104, 0.35);
+}
+.saveButton.saveButtonPending:hover {
+  background: #c9e58a;
+  box-shadow: 0 0 16px rgba(185, 220, 104, 0.5);
+}
+
+.saveStatus {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: 4px;
+  color: #a9bbb4;
+  white-space: nowrap;
+  font-size: 0.72rem;
+}
+.saveDot {
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6f827b;
+}
+.saveStatus.saved .saveDot {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(185, 220, 104, 0.1);
+}
+.saveStatus.unsaved {
+  color: #e9ae83;
+  font-weight: 600;
+}
+.saveStatus.unsaved .saveDot {
+  background: currentColor;
+}
+.saveStatus.error {
+  color: #edaa94;
+}
+.saveStatus.error .saveDot {
+  background: var(--orange);
+}
+
+/* Tab strip (tabs themselves are styled in ProfileTab.module.css) */
+.configTabs {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+  max-width: min(36vw, 520px);
+  margin-left: -6px;
+  padding: 9px 6px 3px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.configTabAdd {
+  composes: configTab from './ProfileTab.module.css';
+  color: var(--accent);
+  font-size: 1.15rem;
+  border-style: dashed;
+}
+
+@media (max-width: 760px) {
+  .configArea {
+    gap: 5px;
+  }
+  .configSave {
+    height: 24px;
+    padding: 0 8px;
+    border-radius: 7px;
+    font-size: 0.66rem;
+  }
+  .configTabs {
+    max-width: 100%;
+  }
+  .saveStatus {
+    gap: 5px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .saveStatus {
+    display: none;
+  }
+}
