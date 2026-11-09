@@ -119,15 +119,21 @@ export function ParameterPanel({
               onChange({ maxGuildLevel: Number(event.target.value) as 27 | 40 })
             }
           >
-            <option value={27}>27</option>
-            <option value={40}>40</option>
+            <option value={27}>{t('qualifierRound')} (27)</option>
+            <option value={40}>{t('officialRound')} (40)</option>
           </select>
         </label>
       </div>
 
-      <div className={styles.statRow}>
-        <span>{t('extraBottlesAtMax')}</span>
-        <strong>{format(result.extraMaxBottles)}</strong>
+      <div className={styles.statBlock}>
+        <div className={styles.statRow}>
+          <span>{t('extraBottlesAtMax')}</span>
+          <strong>{format(result.extraMaxBottles)}</strong>
+        </div>
+        <div className={styles.statRow}>
+          <span>{t('extraHpAtMax')}</span>
+          <strong>{format(result.extraMaxHp.value)}</strong>
+        </div>
       </div>
 
       <label className={shared.field} {...hint.bind('recoveryRate')}>

@@ -123,12 +123,16 @@
   font-size: 0.65rem;
   line-height: 1.5;
 }
-.statRow {
+.statBlock {
   margin: 0 0 20px;
   padding: 0 0 10px;
+  display: grid;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.statRow {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid var(--line);
   font-size: 0.64rem;
   font-style: italic;
 }
@@ -166,6 +170,12 @@
   font-size: 0.76rem;
   font-weight: 700;
   cursor: pointer;
+}
+/* Indent plain rows to match the package option's border + padding so both
+   checkboxes sit on the same vertical line. */
+.checkRow:not(.packageOption) {
+  padding: 0 13px 0 16px;
+  align-items: center;
 }
 .checkRow input {
   width: 16px;

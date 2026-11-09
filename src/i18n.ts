@@ -210,6 +210,27 @@ export const messages = {
     id: 'Botol tambahan saat level maksimum',
     zh: '满级公会额外药瓶',
   },
+  extraHpAtMax: {
+    vi: 'HP thêm khi Lv bang max',
+    en: 'Extra HP at max level',
+    th: 'HP เพิ่มเมื่อกิลด์เลเวลสูงสุด',
+    id: 'HP tambahan saat level maksimum',
+    zh: '满级公会额外 HP',
+  },
+  qualifierRound: {
+    vi: 'Vòng Loại',
+    en: 'Qualifier',
+    th: 'รอบคัดเลือก',
+    id: 'Babak Kualifikasi',
+    zh: '预选赛',
+  },
+  officialRound: {
+    vi: 'Vòng Chính Thức',
+    en: 'Main Round',
+    th: 'รอบหลัก',
+    id: 'Babak Utama',
+    zh: '正式赛',
+  },
   otherRules: {
     vi: 'Quy tắc nguồn bình',
     en: 'Battery sources',
