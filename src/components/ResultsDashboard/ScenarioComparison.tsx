@@ -1,7 +1,7 @@
 import { useCalculator } from '../../context/CalculatorContext';
 import { useFormat, useTranslation } from '../../context/LocaleContext';
-import { InfoTip } from '../InfoTip';
 import { cx } from '../../shared/cx';
+import { FormulaTip } from './FormulaTip';
 import shared from '../shared.module.css';
 import styles from './ScenarioComparison.module.css';
 
@@ -11,7 +11,6 @@ export function ScenarioComparison() {
   const { result } = useCalculator();
   const t = useTranslation();
   const format = useFormat();
-  const formulaFormat = { formatNumber: format, label: t };
   const selectedScenario = result.selectedScenario;
 
   return (
@@ -24,8 +23,7 @@ export function ScenarioComparison() {
           <span aria-hidden="true" />
           <span>{t('currentLevel')}</span>
           <span>
-            {t('guildMax')}{' '}
-            <InfoTip label={result.extraMaxHp.formatFormula(formulaFormat)} />
+            {t('guildMax')} <FormulaTip result={result.extraMaxHp} />
           </span>
         </div>
         <div className={styles.comparisonTable}>
@@ -39,12 +37,7 @@ export function ScenarioComparison() {
               data-tip-row
             >
               <span>
-                {t(key)}{' '}
-                <InfoTip
-                  label={result.scenarios[key].current.formatFormula(
-                    formulaFormat,
-                  )}
-                />{' '}
+                {t(key)} <FormulaTip result={result.scenarios[key].current} />{' '}
                 {key === selectedScenario && <em>{t('currentScenario')}</em>}
               </span>
               <strong>

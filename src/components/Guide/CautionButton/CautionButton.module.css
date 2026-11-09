@@ -1,0 +1,84 @@
+.title {
+  color: #b42323;
+}
+.steps {
+  display: grid;
+  gap: 12px;
+}
+/* `.steps` prefix so these outrank the shared `.card` / `.badge` colors. */
+.steps .ok {
+  border-color: #bfe0c9;
+  background: #f2faf4;
+}
+.steps .bad {
+  border-color: #f0c4c4;
+  background: #fdf4f4;
+}
+.steps .badgeOk {
+  border-color: #9fd3b0;
+  color: #1f6b3a;
+  background: #d3f0dc;
+}
+.steps .badgeBad {
+  border-color: #f0b4b4;
+  color: #b42323;
+  background: #fbd5d5;
+}
+.shot {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.mark {
+  position: absolute;
+  border: 2px solid #e53935;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+.pair {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.shotWithFormula {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+}
+.formula {
+  margin: 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #fff;
+  color: #45514c;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  text-align: center;
+  white-space: pre-line;
+}
+.note {
+  margin: 0;
+  justify-self: stretch;
+  color: #45514c;
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+.tip {
+  margin: 12px 0 0;
+  padding: 8px 10px;
+  border-left: 3px solid #e53935;
+  border-radius: 6px;
+  color: #17221e;
+  background: #fff6e6;
+  font-size: 0.74rem;
+  font-weight: 700;
+}

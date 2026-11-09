@@ -1,20 +1,15 @@
+import type { formulaMessages } from './formulas.i18n';
+
+/** Formula-only text plus shared units / field labels from common messages. */
 export type FormulaLabel =
+  | keyof typeof formulaMessages
   | 'hours'
   | 'minutes'
   | 'days'
   | 'bottles'
-  | 'dailySource'
-  | 'freeSource'
-  | 'roundDown'
   | 'recoveryLimit'
   | 'hpBackup'
-  | 'hpRecoveryRate'
-  | 'timeLeft'
-  | 'fillTime'
-  | 'dischargeTime'
-  | 'scenarioTotalFormula'
-  | 'projectedExtraFormula'
-  | 'currentLevelFormula';
+  | 'hpRecoveryRate';
 
 export interface FormulaFormat {
   formatNumber: (value: number | null) => string;

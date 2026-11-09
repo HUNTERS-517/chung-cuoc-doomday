@@ -1,0 +1,54 @@
+/* Atoms shared by the guide dialog, focus hint and caution dialog. */
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 16px;
+  padding: 0 4px;
+  border: 1px solid #b3d4f2;
+  border-radius: 5px;
+  color: #2f5878;
+  background: #cfe7fd;
+  font: 800 0.62rem/1 monospace;
+  letter-spacing: 0.02em;
+  vertical-align: 1px;
+}
+.badgeInline {
+  margin-left: 6px;
+}
+
+.card {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #e3e8e4;
+  border-radius: 10px;
+  background: #f7f9f7;
+}
+.cardCaption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+/* The 249 package field is highlighted in red everywhere it appears. */
+.packageCaption {
+  color: #b42323;
+}
+.packageCaption .badge {
+  border-color: #f0b4b4;
+  color: #b42323;
+  background: #fff0f0;
+}
+.card.packageRegion {
+  border-color: #e9a1a1;
+  color: #b42323;
+  background: #fff0f0;
+  box-shadow: inset 3px 0 #c53b3b;
+}

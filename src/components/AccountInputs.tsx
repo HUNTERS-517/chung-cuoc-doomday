@@ -3,9 +3,13 @@ import type { TranslationKey } from '../i18n';
 import { useCalculator } from '../context/CalculatorContext';
 import { useTranslation } from '../context/LocaleContext';
 import { cx } from '../shared/cx';
-import { GuideBadge, GuideHeading, useGuideFocusHint } from './Guide/Guide';
-import { ACCOUNT_GUIDE_FIELDS } from './Guide/guideData';
-import { CautionButton } from './Guide/CautionButton';
+import {
+  ACCOUNT_GUIDE_FIELDS,
+  CautionButton,
+  GuideBadge,
+  GuideHeading,
+  useGuideFocusHint,
+} from './Guide';
 import shared from './shared.module.css';
 import styles from './AccountInputs.module.css';
 

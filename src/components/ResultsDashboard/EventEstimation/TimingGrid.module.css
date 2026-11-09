@@ -1,0 +1,49 @@
+.timingGrid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.timingGrid > div {
+  position: relative;
+  padding: 14px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-radius: 11px;
+  color: var(--ink);
+  background: #cfe7fd;
+}
+
+.timingGrid span {
+  color: #52708c;
+  font-size: 0.68rem;
+}
+
+.timingGrid strong {
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.timingGrid strong em {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.timingGrid small {
+  color: #52708c;
+  font-size: 0.65rem;
+}
+
+.timingGrid .timingAccent {
+  border: 4px solid rgba(240, 80, 75, 0.6);
+}
+
+@media (max-width: 1020px) {
+  .timingGrid {
+    grid-template-columns: 1fr;
+  }
+}
